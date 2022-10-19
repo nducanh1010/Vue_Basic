@@ -1,13 +1,10 @@
 <template>
   <div id="app">
-    <el-container>
-      <el-header> <Navigation /></el-header>
-      <el-main>
-        <img alt="Vue logo" src="./assets/logo.png" /><router-view /></el-main>
-    </el-container>
-
-    
-    
+    <Navigation />
+    <el-main>
+      <img alt="Vue logo" src="./assets/logo.png" />
+      <router-view />
+    </el-main>
   </div>
 </template>
 
@@ -23,10 +20,10 @@ export default {
 
 <style>
 #app {
-   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* background-color: rgb(238, 223, 182); */
 }
 </style>

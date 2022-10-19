@@ -8,6 +8,7 @@ import HomeWork from "./views/HomeWork.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
 import NotFound from "./views/NotFound.vue"
+import Login from "./views/Login.vue"
 
 const routes=[
     {
@@ -48,6 +49,12 @@ const routes=[
         path:'/:pathMatch(.*)*',
         component:NotFound
     }
+    ,
+    {
+        path:'/login',
+        component:Login
+    }
+    
 ];
 // const router= createRouter({    
 //     history:createWebHashHistory(process.env.BASE_URL),

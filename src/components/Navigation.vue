@@ -1,11 +1,28 @@
-<template>
-  <el-menu
+<template> 
+  
+  <el-menu 
     :default-active="activeIndex"
     class="el-menu-demo"
     mode="horizontal"
     :ellipsis="false"
     background-color="#8EBD78"
-    font-size="--el-font-size-large"
+    v-if="isLogged"
+  >
+    <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
+    
+    <div class="flex-grow"/>
+    <el-sub-menu index="1"   >
+      <template style="font-size:20px" #title > User</template>
+      <el-menu-item index="1-1" ><router-link to="/login">Login</router-link></el-menu-item>
+    </el-sub-menu>
+  </el-menu>
+  <el-menu 
+    :default-active="activeIndex"
+    class="el-menu-demo"
+    mode="horizontal"
+    :ellipsis="false"
+    background-color="#8EBD78"
+    v-else
   >
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
     <el-menu-item index="1"><router-link :to="{ name: 'homepage-route' }">Home</router-link></el-menu-item>
@@ -15,33 +32,41 @@
     <el-menu-item index="5"> <router-link to="/contact">Contact</router-link></el-menu-item>
     <el-sub-menu index="6">
       <template #title><router-link to="/homework" 
-        > Extend Homework</router-link></template>
+        style="font-size:20px" > Extend Homework</router-link></template>
       <el-menu-item index="6-1">Text</el-menu-item>
       <el-menu-item index="6-2">Calculate</el-menu-item>
       <el-menu-item index="6-3">Contact</el-menu-item>
     </el-sub-menu>
-    <div class="flex-grow" />
-
-    <el-sub-menu index="7">
-      <template #title> User</template>
+    <div class="flex-grow"/>
+    <el-sub-menu index="7"   >
+      <template style="font-size:20px" #title > User</template>
       <el-menu-item index="7-1"> Profile</el-menu-item>
-      <el-menu-item index="7-2">Log out</el-menu-item>
+      <el-menu-item index="7-2" ><router-link to="/login">Log out</router-link></el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 <script>
+import Login from "../views/Login.vue"
+
 export default {
-  name: 'Navigation',
-  data() {
-    return {
-      activeName: 'first',
-    };
-  },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
+    name: "Navigation",
+    data() {
+        return {
+            activeName: "first",
+            isLogged: true
+        };
     },
-  },
+    computed:{
+      checkLogin() { 
+        }
+    },
+    methods: {
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+        
+    },
+    components: { Login }
 };
 </script>
 <style scoped>
@@ -59,6 +84,7 @@ ul,li{
   line-height: inherit;
   white-space: nowrap;
   width: 9.375rem;
+  margin-left: 12rem;
 }
 .flex-grow {
   flex-grow: 1;
