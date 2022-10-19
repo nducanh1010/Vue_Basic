@@ -1,174 +1,86 @@
 <template>
-  <div class="login-page">
-    <transition name="fade">
-      <div v-if="!registerActive" class="wallpaper-login"></div>
-    </transition>
-    <div class="wallpaper-register"></div>
+  <el-row :gutter="20">
+  <el-col :span="6" :offset="6"><div class="grid-content bg-purple">  <form>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form2Example1" class="form-control" />
+    <label class="form-label" for="form2Example1">Email address</label>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
-          <div v-if="!registerActive" class="card login" v-bind:class="{ error: emptyFields }">
-            <h1>Sign In</h1>
-            <form class="form-group">
-              <input v-model="emailLogin" type="email" class="form-control" placeholder="Email" required />
-              <input v-model="passwordLogin" type="password" class="form-control" placeholder="Password" required />
-              <input type="submit" class="btn btn-primary" @click="doLogin" />
-              <p>
-                Don't have an account?
-                <a href="#" @click="(registerActive = !registerActive), (emptyFields = false)">Sign up here</a>
-              </p>
-              <p><a href="#">Forgot your password?</a></p>
-            </form>
-          </div>
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <input type="password" id="form2Example2" class="form-control" />
+    <label class="form-label" for="form2Example2">Password</label>
+  </div>
 
-          <div v-else class="card register" v-bind:class="{ error: emptyFields }">
-            <h1>Sign Up</h1>
-            <form class="form-group">
-              <input v-model="emailReg" type="email" class="form-control" placeholder="Email" required />
-              <input v-model="passwordReg" type="password" class="form-control" placeholder="Password" required />
-              <input
-                v-model="confirmReg"
-                type="password"
-                class="form-control"
-                placeholder="Confirm Password"
-                required
-              />
-              <input type="submit" class="btn btn-primary" @click="doRegister" />
-              <p>
-                Already have an account?
-                <a href="#" @click="(registerActive = !registerActive), (emptyFields = false)">Sign in here</a>
-              </p>
-            </form>
-          </div>
-        </div>
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+        <label class="form-check-label" for="form2Example31"> Remember me </label>
       </div>
     </div>
+
+    <div class="col">
+      <!-- Simple link -->
+      <a href="#!">Forgot password?</a>
+    </div>
   </div>
+
+  <!-- Submit button -->
+  <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Not a member? <a href="#!">Register</a></p>
+    <p>or sign up with:</p>
+    <button type="button" class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-google"></i>
+    </button>
+
+    <button type="button" class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-twitter"></i>
+    </button>
+
+    <button type="button" class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-github"></i>
+    </button>
+  </div>
+</form></div></el-col>
+  <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+ 
 </template>
 <script>
-import { Search } from '@element-plus/icons-vue';
-
 import axios from 'axios';
 export default {
-  name: 'Login',
-  data() {
-    return {
-      registerActive: false,
-      emailLogin: '',
-      passwordLogin: '',
-      emailReg: '',
-      passwordReg: '',
-      confirmReg: '',
-      emptyFields: false,
-      users: [],
-    };
-  },
-
-  methods: {
-    doLogin() {
-      if (this.emailLogin === '' || this.passwordLogin === '') {
-        this.emptyFields = true;
-      } else {
-        alert('You are now logged in');
-      }
-    },
-
-    doRegister() {
-      if (this.emailReg === '' || this.passwordReg === '' || this.confirmReg === '') {
-        this.emptyFields = true;
-      } else {
-        alert('You are now registered');
-      }
-    },
-  },
-  async created() {
-    let res = await axios.get('https://6348bcf4a59874146b0fdadc.mockapi.io/user/username');
-    let data = res && res.data ? res.data : [];
-    if (data && data.length > 0) {
-      let reverseData = data.slice(0, 10);
-      this.users = reverseData;
-      reverseData.map(item => {
-        console.log(item.username, '------', item.password);
-      });
-    } else {
-      this.users = [];
+  name: "Login",
+  data(){
+    return{
+      users:[],
     }
   },
+   async created(){
+    let res = await axios.get('https://6348bcf4a59874146b0fdadc.mockapi.io/user/username');
+      let data = res && res.data ? res.data : [];
+      if (data && data.length > 0) {
+        let reverseData = data.slice(0, 10);
+        this.users = reverseData;
+        reverseData.map(item => {
+          console.log(item.username, '------', item.password);
+        });
+      } else {
+        this.users = [];
+      }
+  }
+  
+ 
+  
 };
 </script>
-
-<style scoped lang="scss">
-p {
-  line-height: 1rem;
-}
-
-.card {
-  padding: 20px;
-}
-
-.form-group {
-  input {
-    margin-bottom: 20px;
-  }
-}
-
-.login-page {
-  align-items: center;
-  display: flex;
-  height: 100vh;
-
-  .wallpaper-login {
-    background: url(https://images.pexels.com/photos/32237/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
-      no-repeat center center;
-    background-size: cover;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-  }
-
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
-  }
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  .wallpaper-register {
-    background-size: cover;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-  }
-
-  h1 {
-    margin-bottom: 1.5rem;
-  }
-}
-
-.error {
-  animation-name: errorShake;
-  animation-duration: 0.3s;
-}
-
-@keyframes errorShake {
-  0% {
-    transform: translateX(-25px);
-  }
-  25% {
-    transform: translateX(25px);
-  }
-  50% {
-    transform: translateX(-25px);
-  }
-  75% {
-    transform: translateX(25px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-</style>

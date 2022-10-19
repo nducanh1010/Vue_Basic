@@ -2,7 +2,7 @@
   <div id="app">
     <Navigation />
     <el-main>
-      <img alt="Vue logo" src="./assets/logo.png" />
+   
       <router-view />
     </el-main>
   </div>
