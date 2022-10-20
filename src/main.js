@@ -13,6 +13,7 @@ import '@element-plus/icons-vue'
 // console.log(ElementPlus)
 const app = createApp(App)
 app.use(ElementPlus)
+app.use(store)
 // app.use(search)
 app.use(router)
 app.mount('#app')

@@ -43,6 +43,7 @@ const routes=[
     },
     {
         path:"/register",
+        name:'register',
     component:Register,
     },
     {
@@ -52,6 +53,12 @@ const routes=[
     ,
     {
         path:'/login',
+        name:'login',
+        component:Login
+    },
+    {
+        path:'/login/:id',
+        name:'loginid',
         component:Login
     }
     
