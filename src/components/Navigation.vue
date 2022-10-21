@@ -6,7 +6,7 @@
     mode="horizontal"
     :ellipsis="false"
     background-color="#8EBD78"
-    v-if="!isLogged"
+    v-if="isLogged"
   >
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
     
