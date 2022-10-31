@@ -1,6 +1,5 @@
 <template>
-   
-  <div class="login-container">
+  <div v-if="isAuthenticated==false" class="login-container">
     <div class="signIn">Sign in</div>
     <div class="input-user">
       <label for="">Username: </label>
@@ -10,21 +9,23 @@
       <label>Password: </label>
       <input type="text" v-model.lazy="password" />
     </div>
-    <button class="btn-register"> <router-link :to="{name:'register'}">Register</router-link></button>
-    <button class="btn-login" @click="changeLogin">Login</button>
- 
+    <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button>
+    <button class="btn-login" @click="TOGGLE_AUTH">
+      Login
+    </button>
   </div>
 </template>
 <script>
 import axios from 'axios';
+import { mapMutations, mapGetters } from 'vuex';
 export default {
+  computed: mapGetters(['isAuthenticated']),
   name: 'Login',
   data() {
     return {
       users: [],
       username: '',
       password: '',
-      isLogged:false
     };
   },
   async created() {
@@ -40,16 +41,18 @@ export default {
       this.users = [];
     }
   },
-  methods:{
-    changeLogin(){ 
-      this.$emit('change-login',!this.isLogged)
-    }
-  }
+  methods: {
+    ...mapMutations(['TOGGLE_AUTH']),
+    
+  },
 };
 </script>
 <style scoped lang="scss">
-a{text-decoration: none;}
-ul,li{
+a {
+  text-decoration: none;
+}
+ul,
+li {
   text-decoration: none;
   font-size: 20px;
 }
@@ -67,50 +70,51 @@ ul,li{
 .flex-grow {
   flex-grow: 1;
 }
-    .login-container {
-      justify-content: center;
-      align-items: center;
-        max-width    : 400px;
-      
-        border-radius: 3px;
-        padding      : 15px;
-        margin       : 0 auto;
-        
-        ;
+.login-container {
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
 
-        .signIn{
-            margin-top: 15px ;
-            text-align: center;
-            font-weight: bold;
-            font-size: 2rem;
-        }
+  border-radius: 3px;
+  padding: 15px;
+  margin: 0 auto;
 
-        .input-user {
-          text-align: left !important;
-          border-radius: 100px;
-            padding: 5px;
-            margin : 5px;
-            display       : flex;
-            flex-direction: column;
-        }
+  .signIn {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+  }
 
-        button {
-          text-align: center !important;
-            margin: 20px;
-            width: 7rem;
-            color: white;
-            height: 2rem;
-            border: none;
-        }
-        .btn-login{
-          border-radius: 10px;
-          text-align   : center !important;
-          background-color: rgb(67, 166, 245);
-        }
-        .btn-register{
-          a{color: white;}
-          border-radius: 10px;
-          text-align   : center !important;
-          background-color: rgb(24, 207, 79);
-        }
-    }</style>
+  .input-user {
+    text-align: left !important;
+    border-radius: 100px;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    text-align: center !important;
+    margin: 20px;
+    width: 7rem;
+    color: white;
+    height: 2rem;
+    border: none;
+  }
+  .btn-login {
+    border-radius: 10px;
+    text-align: center !important;
+    background-color: rgb(67, 166, 245);
+  }
+  .btn-register {
+    a {
+      color: white;
+    }
+    border-radius: 10px;
+    text-align: center !important;
+    background-color: rgb(24, 207, 79);
+  }
+}
+</style>
