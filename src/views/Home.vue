@@ -16,7 +16,7 @@ export default {
 
   methods: {
     async getUserData() {
-      let res = await axios.get('https://6348bcf4a59874146b0fdadc.mockapi.io/user/username');
+      let res = await axios.get('https://635f4c88ca0fe3c21a993f1b.mockapi.io/v1/userdata');
       let data = res && res.data ? res.data : [];
       if (data && data.length > 0) {
         let reverseData = data.slice(0, 10);

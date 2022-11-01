@@ -1,24 +1,24 @@
-const state = {
-	auth: {
-		isAuthenticated: false
-	}
-}
+// const state = {
+// 	auth: {
+// 		isAuthenticated: false
+// 	}
+// }
 
-const getters = {
-	isAuthenticated: state => state.auth.isAuthenticated
-}
+// const getters = {
+// 	isAuthenticated: state => state.auth.isAuthenticated
+// }
 
-const actions = {}
+// const actions = {}
 
-const mutations = {
-	TOGGLE_AUTH(state) {
-		state.auth.isAuthenticated = !state.auth.isAuthenticated
-	}
-}
+// const mutations = {
+// 	TOGGLE_AUTH(state) {
+// 		state.auth.isAuthenticated = !state.auth.isAuthenticated
+// 	}
+// }
 
-export default {
-	state,
-	getters,
-	actions,
-	mutations
-}
+// export default {
+// 	state,
+// 	getters,
+// 	actions,
+// 	mutations
+// }

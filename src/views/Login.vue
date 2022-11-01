@@ -1,35 +1,37 @@
 <template>
-  <div v-if="isAuthenticated==false" class="login-container">
+  <div ref="userForm" class="login-container" v-if="checkAuthen === false">
     <div class="signIn">Sign in</div>
-    <div class="input-user">
+    <div ref="userForm" class="input-user">
       <label for="">Username: </label>
-      <input type="text" v-model.lazy="username" />
+      <input type="text" v-model.lazy="userForm.email" />
     </div>
     <div class="input-user">
       <label>Password: </label>
-      <input type="text" v-model.lazy="password" />
+      <input type="text" v-model.lazy="userForm.password" />
     </div>
     <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button>
-    <button class="btn-login" @click="TOGGLE_AUTH">
-      Login
-    </button>
+    <button class="btn-login" @click="handleLogin">Login</button>
   </div>
 </template>
 <script>
+// import loading from '@/components/Loading.vue'
+import { LOGIN } from '@/constants/actions';
 import axios from 'axios';
-import { mapMutations, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
-  computed: mapGetters(['isAuthenticated']),
+
   name: 'Login',
   data() {
     return {
-      users: [],
-      username: '',
-      password: '',
+      loading: true,
+      userForm: {
+        email: '',
+        password: '',
+      },
     };
   },
   async created() {
-    let res = await axios.get('https://6348bcf4a59874146b0fdadc.mockapi.io/user/username');
+    let res = await axios.get('https://635f4c88ca0fe3c21a993f1b.mockapi.io/v1/userdata');
     let data = res && res.data ? res.data : [];
     if (data && data.length > 0) {
       let reverseData = data.slice(0, 10);
@@ -41,10 +43,33 @@ export default {
       this.users = [];
     }
   },
-  methods: {
-    ...mapMutations(['TOGGLE_AUTH']),
-    
+  computed: {
+    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
+    checkAuthen() {
+      return this.getUserRole === 'admin' ? true : false;
+    },
   },
+  methods: {
+    // ...mapMutations(['TOGGLE_AUTH']),
+
+    handleLogin() {
+      this.$store
+        .dispatch(`auth/${LOGIN}`, { ...this.userForm })
+        .then(() => {
+          this.$refs.userForm.resetFields();
+          setTimeout(() => {
+            this.$router.push('/');
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+  },
+  
 };
 </script>
 <style scoped lang="scss">

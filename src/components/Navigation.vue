@@ -1,22 +1,21 @@
-<template> 
-  
-  <el-menu 
+<template>
+  <el-menu
     :default-active="activeIndex"
     class="el-menu-demo"
     mode="horizontal"
     :ellipsis="false"
     background-color="#8EBD78"
-    v-if="!isAuthenticated"
+    v-if="checkAuthen === false"
   >
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
-    
-    <div class="flex-grow"/>
-    <el-sub-menu index="1"   >
-      <template style="font-size:20px" #title > User</template>
-      <el-menu-item index="1-1" ><router-link to="/login">Login</router-link></el-menu-item>
+
+    <div class="flex-grow" />
+    <el-sub-menu index="1">
+      <template style="font-size: 20px" #title> User</template>
+      <el-menu-item index="1-1"><router-link to="/login">Login</router-link></el-menu-item>
     </el-sub-menu>
   </el-menu>
-  <el-menu 
+  <el-menu
     :default-active="activeIndex"
     class="el-menu-demo"
     mode="horizontal"
@@ -31,48 +30,71 @@
     <el-menu-item index="4"><router-link to="/about">About</router-link></el-menu-item>
     <el-menu-item index="5"> <router-link to="/contact">Contact</router-link></el-menu-item>
     <el-sub-menu index="6">
-      <template #title><router-link to="/homework" 
-        style="font-size:20px" > Extend Homework</router-link></template>
+      <template #title><router-link to="/homework" style="font-size: 20px"> Extend Homework</router-link></template>
       <el-menu-item index="6-1">Text</el-menu-item>
       <el-menu-item index="6-2">Calculate</el-menu-item>
       <el-menu-item index="6-3">Contact</el-menu-item>
     </el-sub-menu>
-    <div class="flex-grow"/>
-    <el-sub-menu index="7"   >
-      <template style="font-size:20px" #title > User</template>
+    <div class="flex-grow" />
+    <el-sub-menu index="7">
+      <template style="font-size: 20px" #title> User</template>
       <el-menu-item index="7-1"> Profile</el-menu-item>
-      <el-menu-item index="7-2"  @click="TOGGLE_AUTH"><router-link to="/login">Log out</router-link></el-menu-item>
+      <el-menu-item index="7-2" @click="handleLogout">Log out</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 <script>
-import Login from "../views/Login.vue"
-import { mapMutations, mapGetters } from 'vuex'
+import Login from '../views/Login.vue';
+import { mapGetters } from 'vuex';
 export default {
-    name: "Navigation",
-    data() {
-        return {
-            activeName: "first",
-            isLogged: false
-        };
+  name: 'Navigation',
+  data() {
+    return {
+      activeName: 'first',
+    };
+  },
+  computed: {
+    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
+    checkAuthen() {
+      const isAuthen = this.getUserRole === 'admin' ? true : false;
+      console.log(isAuthen);
+      return this.getUserRole === 'admin' ? true : false;
     },
-    computed:mapGetters(['isAuthenticated']),
-    methods: {
-      ...mapMutations(['TOGGLE_AUTH']),
-        handleClick(tab, event) {
-            console.log(tab, event);
-        },
-        checklogin(value){
-          this.isLogged=value
-        }
-        
+  },
+  methods: {
+    handleLogout() {
+      this.$store
+        .dispatch(`auth/${LOGOUT}`)
+        .then(message => {
+          this.$message({
+            message,
+            showClose: true,
+            duration: 10000,
+          });
+
+          setTimeout(() => {
+            this.$router.push('/login'); // redirect
+          });
+        })
+        .catch(error => {
+          this.$message({
+            message: error?.response?.data?.message,
+            type: 'error',
+            showClose: true,
+            duration: 10000,
+          });
+        });
     },
-    components: { Login }
+  },
+  components: { Login },
 };
 </script>
 <style scoped>
-a{text-decoration: none;}
-ul,li{
+a {
+  text-decoration: none;
+}
+ul,
+li {
   text-decoration: none;
   font-size: 20px;
 }
