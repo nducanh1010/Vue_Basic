@@ -1,5 +1,5 @@
 import http from '@/plugins/axios';
-import axios from 'axios';
+
 import { authHeaders } from '@/utils/auth';
 
 class AuthService {
@@ -10,21 +10,19 @@ class AuthService {
         password,
       })
       .then(res => { 
-        console.log(res)
-        return res?.data?.data;
+        return res?.data;
       })
       .catch(err => {
         return Promise.reject(err);
       });
   }
-  register({ email, password }) {
+  register({ email, password,name,c_password, }) {
     return http
       .post('/register', {
-        email: email,
+        email,
         password,
-      })
-      .then(res => {
-        return res?.data?.data;
+        name,
+        c_password
       })
       .catch(err => {
         return Promise.reject(err);
@@ -33,13 +31,15 @@ class AuthService {
 
   logout() {
     return http
-      .get('/logout', {
+      .post('/logout', {
         headers: authHeaders(),
       })
       .then(res => {
-        return res?.data?.message;
+        console.log(res.message)
+        return res?.message;
       })
       .catch(err => {
+        console.log(err.message)
         return Promise.reject(err);
       });
   }

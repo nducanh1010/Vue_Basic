@@ -2,6 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 import router from '@/router';
 import { removeAuthenticated } from '@/utils/auth';
+import { createApp} from "vue";
 
 const options = {
   arrayFormat: 'bracket',
@@ -10,7 +11,9 @@ const options = {
 // set up default config for http requests
 const http = axios.create({
   baseURL: process.env.VUE_APP_BASE_API_URL,
-  paramsSerializer: params => queryString.stringify(params, options),
+  // paramsSerializer: params => queryString.stringify(params, options),
+
+  
 });
 
 // add a request interceptor
@@ -38,4 +41,5 @@ http.interceptors.response.use(
     // return Promise.reject(error);
   },
 );
+
 export default http; //import global in main.js

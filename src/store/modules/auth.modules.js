@@ -17,6 +17,7 @@ export const auth = {
   mutations: {
     [LOGIN](state, { user }) {
       state.user = user;
+      // localStorage.setItem('master_user', JSON.stringify(user))
     },
     [LOGOUT](state) {
       state.user = '';
@@ -33,17 +34,21 @@ export const auth = {
         }
       });
     },
-    [REGISTER]({ account, password }) {
-      return authService.register({ account, password });
-    },
     [LOGOUT]({ commit }) {
       return authService.logout().then(message => {
+        console.log(message)
         commit(LOGOUT);
         removeAuthenticated(); // remove authentication in local storage
 
         return message 
       });
     },
+    [REGISTER]({commit},{ email,password,name,c_password }) {
+      console.log(email,password,name,c_password)
+      return authService.register({ email, password,name,c_password})
+    
+    },
+    
     [REFRESH]({ commit }) {
       return authService.refresh().then(data => {
         if (data && data.token) {

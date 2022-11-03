@@ -5,7 +5,7 @@
     mode="horizontal"
     :ellipsis="false"
     background-color="#8EBD78"
-    v-if="checkAuthen === false"
+    v-if="!checkAuthen"
   >
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
 
@@ -45,19 +45,20 @@
 </template>
 <script>
 import Login from '../views/Login.vue';
+import { LOGOUT } from '@/constants/actions';
 import { mapGetters } from 'vuex';
 export default {
   name: 'Navigation',
   data() {
     return {
-      activeName: 'first',
+      
+      isAuthen:false
     };
   },
   computed: {
     ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
     checkAuthen() {
-      const isAuthen = this.getUserRole === 'admin' ? true : false;
-      console.log(isAuthen);
+      
       return this.getUserRole === 'admin' ? true : false;
     },
   },
@@ -66,6 +67,7 @@ export default {
       this.$store
         .dispatch(`auth/${LOGOUT}`)
         .then(message => {
+          
           this.$message({
             message,
             showClose: true,

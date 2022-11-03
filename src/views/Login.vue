@@ -7,7 +7,7 @@
     </div>
     <div class="input-user">
       <label>Password: </label>
-      <input type="text" v-model.lazy="userForm.password" />
+      <input type="password" v-model.lazy="userForm.password" />
     </div>
     <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button>
     <button class="btn-login" @click="handleLogin">Login</button>
@@ -19,7 +19,6 @@ import { LOGIN } from '@/constants/actions';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 export default {
-
   name: 'Login',
   data() {
     return {
@@ -30,21 +29,12 @@ export default {
       },
     };
   },
-  async created() {
-    let res = await axios.get('https://635f4c88ca0fe3c21a993f1b.mockapi.io/v1/userdata');
-    let data = res && res.data ? res.data : [];
-    if (data && data.length > 0) {
-      let reverseData = data.slice(0, 10);
-      this.users = reverseData;
-      reverseData.map(item => {
-        console.log(item.username, '------', item.password);
-      });
-    } else {
-      this.users = [];
-    }
-  },
   computed: {
     ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
+    validForm() {
+      this.userForm.email = this.userForm.email.trim();
+      this.userForm.password = this.userForm.password.trim();
+    },
     checkAuthen() {
       return this.getUserRole === 'admin' ? true : false;
     },
@@ -53,10 +43,19 @@ export default {
     // ...mapMutations(['TOGGLE_AUTH']),
 
     handleLogin() {
+      this.validForm;
       this.$store
         .dispatch(`auth/${LOGIN}`, { ...this.userForm })
+        .then(message => {
+          this.$message({
+            message,
+            showClose: true,
+            duration: 5000,
+          });
+        })
         .then(() => {
-          this.$refs.userForm.resetFields();
+          this.$refs.userForm.email = '';
+          this.$refs.userForm.password = '';
           setTimeout(() => {
             this.$router.push('/');
           });
@@ -69,7 +68,6 @@ export default {
         });
     },
   },
-  
 };
 </script>
 <style scoped lang="scss">
