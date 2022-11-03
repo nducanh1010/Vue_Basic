@@ -38,7 +38,7 @@
     <div class="flex-grow" />
     <el-sub-menu index="7">
       <template style="font-size: 20px" #title> User</template>
-      <el-menu-item index="7-1"> Profile</el-menu-item>
+      <el-menu-item index="7-1" @click="handleProfile"> Profile</el-menu-item>
       <el-menu-item index="7-2" @click="handleLogout">Log out</el-menu-item>
     </el-sub-menu>
   </el-menu>
@@ -56,10 +56,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
-    checkAuthen() {
-      
-      return this.getUserRole === 'admin' ? true : false;
+    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole','getUserId']),
+    checkAuthen() {    
+      console.log(this.getUserId)
+      return this.getUserId!==undefined  ? true : false;
     },
   },
   methods: {
@@ -87,6 +87,11 @@ export default {
           });
         });
     },
+    handleProfile(){
+      this.$router.push({
+        path:`/userprofile/${this.getUserId}`
+      })
+    }
   },
   components: { Login },
 };

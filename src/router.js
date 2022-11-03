@@ -9,7 +9,7 @@ import Register from "./views/Register.vue"
 import News from "./views/News.vue"
 import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
-
+import DetailUser from"./views/User/DetailUser"
 const routes=[
     {
         path:"/",
@@ -60,6 +60,11 @@ const routes=[
         path:'/login/:id',
         name:'loginid',
         component:Login
+    },
+    {
+        path:'/userprofile/:id',
+        name:'userprofile',
+        component:DetailUser
     }
     
 ];

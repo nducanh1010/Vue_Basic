@@ -27,16 +27,7 @@
       </div>
     </div>
 
-    <el-button
-      plain
-      @click="
-        openNotify();
-       
-      "
-      class="btn-register"
-    >
-      Register
-    </el-button>
+    <el-button plain @click="openNotify()" class="btn-register"> Register </el-button>
 
     <div class="foot-link">Already have account ? <router-link :to="{ name: 'login' }">Sign in</router-link></div>
   </div>
@@ -88,8 +79,8 @@ export default {
       const checklengthPwd = password.length <= 8 ? false : true;
       const checkContainUpperCase = this.isUpper(password);
       const checkContainNumber = this.hasNumber(password);
-      console.log(checklengthPwd,checkContainUpperCase,checkContainNumber)
-      if (checklengthPwd && checkContainNumber && checkContainUpperCase) {;
+      console.log(checklengthPwd, checkContainUpperCase, checkContainNumber);
+      if (checklengthPwd && checkContainNumber && checkContainUpperCase) {
         return true;
       }
       return false;
@@ -102,7 +93,7 @@ export default {
         });
         return;
       }
-      console.log(this.validatePassword(this.userForm.password))
+      console.log(this.validatePassword(this.userForm.password));
       if (!this.validatePassword(this.userForm.password)) {
         this.$notify({
           title: 'Warning',

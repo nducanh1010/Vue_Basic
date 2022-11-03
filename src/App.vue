@@ -2,7 +2,6 @@
   <div id="app">
     <Navigation />
     <el-main>
-   
       <router-view />
     </el-main>
   </div>

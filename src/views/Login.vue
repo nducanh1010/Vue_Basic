@@ -16,7 +16,6 @@
 <script>
 // import loading from '@/components/Loading.vue'
 import { LOGIN } from '@/constants/actions';
-import axios from 'axios';
 import { mapGetters } from 'vuex';
 export default {
   name: 'Login',
@@ -30,13 +29,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole']),
+    ...mapGetters('auth', ['getUserId']),
     validForm() {
       this.userForm.email = this.userForm.email.trim();
       this.userForm.password = this.userForm.password.trim();
     },
     checkAuthen() {
-      return this.getUserRole === 'admin' ? true : false;
+      return this.getUserId !== undefined ? true : false;
     },
   },
   methods: {
@@ -46,19 +45,24 @@ export default {
       this.validForm;
       this.$store
         .dispatch(`auth/${LOGIN}`, { ...this.userForm })
-        .then(message => {
-          this.$message({
-            message,
-            showClose: true,
-            duration: 5000,
-          });
-        })
+        
         .then(() => {
           this.$refs.userForm.email = '';
           this.$refs.userForm.password = '';
-          setTimeout(() => {
-            this.$router.push('/');
-          });
+          if (this.checkAuthen) {
+            setTimeout(() => {
+              this.$router.push('/');
+            });
+          } else {
+            this.$notify.error({
+              title: 'Error',
+              message: 'User không tồn tại',
+            });
+
+            setTimeout(() => {
+              this.$router.push('/login');
+            });
+          }
         })
         .catch(error => {
           console.log(error);

@@ -12,7 +12,7 @@ export const auth = {
     getUserName: state => state?.user?.profile?.name,
     getUserEmail: state => state?.user?.profile?.email,
     getUserRole: state => (state?.user?.profile?.name),
-    getUserId: state => state?.user.profile.id, 
+    getUserId: state => state?.user?.profile?.id, 
   },
   mutations: {
     [LOGIN](state, { user }) {
