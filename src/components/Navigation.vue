@@ -51,15 +51,14 @@ export default {
   name: 'Navigation',
   data() {
     return {
-      
-      isAuthen:false
+      isAuthen: false,
     };
   },
   computed: {
-    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole','getUserId']),
-    checkAuthen() {    
-      console.log(this.getUserId)
-      return this.getUserId!==undefined  ? true : false;
+    ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole', 'getUserId']),
+    checkAuthen() {
+      console.log(this.getUserId);
+      return this.getUserId !== undefined ? true : false;
     },
   },
   methods: {
@@ -67,7 +66,6 @@ export default {
       this.$store
         .dispatch(`auth/${LOGOUT}`)
         .then(message => {
-          
           this.$message({
             message,
             showClose: true,
@@ -80,18 +78,18 @@ export default {
         })
         .catch(error => {
           this.$message({
-            message: error?.response?.data?.message,
+            message: error?.response?.message,
             type: 'error',
             showClose: true,
             duration: 10000,
           });
         });
     },
-    handleProfile(){
+    handleProfile() {
       this.$router.push({
-        path:`/userprofile/${this.getUserId}`
-      })
-    }
+        path: `/userprofile/${this.getUserId}`,
+      });
+    },
   },
   components: { Login },
 };

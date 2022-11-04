@@ -31,9 +31,7 @@ class AuthService {
 
   logout() {
     return http
-      .post('/logout', {
-        headers: authHeaders(),
-      })
+      .post('/logout')
       .then(res => {
         console.log(res.message)
         return res?.message;

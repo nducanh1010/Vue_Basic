@@ -117,15 +117,7 @@ export default {
       console.log({ ...this.userForm });
       this.$store
         .dispatch(`auth/${REGISTER}`, { ...this.userForm })
-        .then(() => {
-          this.$refs.userForm.email = '';
-          this.$refs.userForm.password = '';
-          this.$refs.userForm.c_passwordpassword = '';
-          this.$refs.userForm.name = '';
-          setTimeout(() => {
-            this.$router.push('/login');
-          });
-        })
+        .then(this.$router.push('/login'))
         .catch(error => {
           console.log(error);
         })

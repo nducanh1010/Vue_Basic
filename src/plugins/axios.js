@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import router from '@/router';
 import { removeAuthenticated } from '@/utils/auth';
 import { createApp} from "vue";
+import { authHeaders } from '@/utils/auth';
 
 const options = {
   arrayFormat: 'bracket',
@@ -19,6 +20,7 @@ const http = axios.create({
 // add a request interceptor
 http.interceptors.request.use(
   config => {
+    config.headers=authHeaders();
     return config;
   },
   error => {

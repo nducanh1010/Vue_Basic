@@ -1,13 +1,10 @@
 import http from '@/plugins/axios';
-import { authHeaders } from '@/utils/auth';
+// import { authHeaders } from '@/utils/auth';
 
 class UserService {
   getListUser() {
     return http
-      .get('/api/users', {
-        
-        headers: authHeaders(),
-      })
+      .get('/users')
       .then(res => {
         return res?.data?.data;
       })
@@ -17,9 +14,7 @@ class UserService {
   }
   update(data) {
     return http
-      .post('/users/update', data, {
-        headers: authHeaders(),
-      })
+      .post('/users/update', data)
       .then(res => {
         return res?.data?.message;
       })
@@ -29,9 +24,7 @@ class UserService {
   }
   detail(id) {
     return http
-      .get(`users/detail/${id}`, {
-        headers: authHeaders(),
-      })
+      .get(`users/detail/${id}`)
       .then(res => {
         return res?.data;
       })
@@ -39,11 +32,9 @@ class UserService {
         return Promise.reject(err);
       });
   }
-  delete(data) {
+  delete(id) {
     return http
-      .post(`api/users/delete/${data.id}`,{
-        headers: authHeaders(),
-      })
+      .post(`/users/delete/${id}`)
       .then(res => {
         return res?.message;
       })

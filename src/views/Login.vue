@@ -47,11 +47,9 @@ export default {
         .dispatch(`auth/${LOGIN}`, { ...this.userForm })
         
         .then(() => {
-          this.$refs.userForm.email = '';
-          this.$refs.userForm.password = '';
           if (this.checkAuthen) {
             setTimeout(() => {
-              this.$router.push('/');
+              this.$router.push('/news');
             });
           } else {
             this.$notify.error({
