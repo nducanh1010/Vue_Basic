@@ -1,41 +1,45 @@
 <template>
-  <div ref="user-form" class="login-container">
-    <div class="signIn">Sign in</div>
-    <div class="input-user">
-      <label for="">Username: </label>
-      <input type="text" v-model.lazy="userForm.email" />
-    </div>
-    <div class="input-user">
-      <label for="">Name: </label>
-      <input type="text" v-model.lazy="userForm.name" />
-    </div>
-    <div class="input-user">
-      <label>Password: </label>
-      <div class="input-password">
-        <input v-if="!showPassword" type="password" class="pwd" v-model.lazy="userForm.password" />
-        <input v-else type="text" class="pwd" v-model.lazy="userForm.password" />
-        <i class="fa-solid fa-eye-low-vision icon-password" @click="showHidePassword"></i>
+  <NavigationVue
+    ><div ref="user-form" class="login-container">
+      <div class="signIn">Sign in</div>
+      <div class="input-user">
+        <label for="">Username: </label>
+        <input type="text" v-model.lazy="userForm.email" />
       </div>
-    </div>
-    <div class="input-user">
-      <label>Confirm password: </label>
-
-      <div class="input-password">
-        <input v-if="!showPassword" type="password" class="pwd" v-model.lazy="userForm.c_password" />
-        <input v-else type="text" class="pwd" v-model.lazy="userForm.c_password" />
-        <i class="fa-solid fa-eye-low-vision icon-password" @click="showHidePassword"></i>
+      <div class="input-user">
+        <label for="">Name: </label>
+        <input type="text" v-model.lazy="userForm.name" />
       </div>
-    </div>
+      <div class="input-user">
+        <label>Password: </label>
+        <div class="input-password">
+          <input v-if="!showPassword" type="password" class="pwd" v-model.lazy="userForm.password" />
+          <input v-else type="text" class="pwd" v-model.lazy="userForm.password" />
+          <i class="fa-solid fa-eye-low-vision icon-password" @click="showHidePassword"></i>
+        </div>
+      </div>
+      <div class="input-user">
+        <label>Confirm password: </label>
 
-    <el-button plain @click="openNotify()" class="btn-register"> Register </el-button>
+        <div class="input-password">
+          <input v-if="!showPassword" type="password" class="pwd" v-model.lazy="userForm.c_password" />
+          <input v-else type="text" class="pwd" v-model.lazy="userForm.c_password" />
+          <i class="fa-solid fa-eye-low-vision icon-password" @click="showHidePassword"></i>
+        </div>
+      </div>
 
-    <div class="foot-link">Already have account ? <router-link :to="{ name: 'login' }">Sign in</router-link></div>
-  </div>
+      <el-button plain @click="openNotify()" class="btn-register"> Register </el-button>
+
+      <div class="foot-link">Already have account ? <router-link :to="{ name: 'login' }">Sign in</router-link></div>
+    </div></NavigationVue
+  >
 </template>
 <script>
+import NavigationVue from '@/components/Navigation.vue';
 import { REGISTER } from '@/constants/actions';
 export default {
   name: 'Register',
+  components: { NavigationVue },
   data() {
     return {
       userForm: {

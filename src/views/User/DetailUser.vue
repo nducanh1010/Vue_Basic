@@ -1,37 +1,41 @@
 <template>
-  <div class="greeting">Greeting user {{ title }} !!</div>
-  <el-row :gutter="20">
-    <el-col :span="6" :offset="8"
-      ><div class="grid-content bg-purple">
-        <el-form :label-position="right" label-width="100px" :model="userProfile" size="mini">
-          <el-form-item label="User Id :">
-            <span>{{ userProfile.id }}</span>
-          </el-form-item>
+  <NavigationVue
+    ><div class="greeting">Greeting user {{ title }} !!</div>
+    <el-row :gutter="20">
+      <el-col :span="6" :offset="8"
+        ><div class="grid-content bg-purple">
+          <el-form :label-position="right" label-width="100px" :model="userProfile" size="mini">
+            <el-form-item label="User Id :">
+              <span>{{ userProfile.id }}</span>
+            </el-form-item>
 
-          <el-form-item label="User Name :">
-            <span v-if="!shouldUpdate">{{ userProfile.name }}</span>
-            <el-input v-model="userProfile.name" v-else></el-input>
-          </el-form-item>
-          <el-form-item label="User Email :">
-            <span v-if="!shouldUpdate">{{ userProfile.email }}</span>
-            <el-input v-else v-model="userProfile.email"></el-input>
-          </el-form-item>
-        </el-form></div
-    ></el-col>
-  </el-row>
-  <div class="btn_user">
-    <el-button plain @click="handleUpdate" v-if="!shouldUpdate" class="btn-update"> Update User </el-button>
-    <el-button plain @click="handleSave" v-else class="btn-save"> Save </el-button>
-    <el-button plain @click="handleDeleteUser" class="btn-delete"> Delete </el-button>
-  </div>
+            <el-form-item label="User Name :">
+              <span v-if="!shouldUpdate">{{ userProfile.name }}</span>
+              <el-input v-model="userProfile.name" v-else></el-input>
+            </el-form-item>
+            <el-form-item label="User Email :">
+              <span v-if="!shouldUpdate">{{ userProfile.email }}</span>
+              <el-input v-else v-model="userProfile.email"></el-input>
+            </el-form-item>
+          </el-form></div
+      ></el-col>
+    </el-row>
+    <div class="btn_user">
+      <el-button plain @click="handleUpdate" v-if="!shouldUpdate" class="btn-update"> Update User </el-button>
+      <el-button plain @click="handleSave" v-else class="btn-save"> Save </el-button>
+      <el-button plain @click="handleDeleteUser" class="btn-delete"> Delete </el-button>
+    </div>
+  </NavigationVue>
 </template>
 <script>
+import NavigationVue from '@/components/Navigation.vue';
 import userService from '@/services/user.services';
 import { LOGOUT } from '@/constants/actions';
 // import authService from '@/services/auth.services';
 import { isEmail } from '@/utils/validate';
 
 export default {
+  computed: { NavigationVue },
   created() {
     // console.log(this.$route.params.id);
 
@@ -77,7 +81,7 @@ export default {
               this.userProfile = res;
               this.title = res?.name;
             });
-            this.shouldUpdate=!this.shouldUpdate
+            this.shouldUpdate = !this.shouldUpdate;
             return;
           })
           .catch(() => {

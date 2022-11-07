@@ -1,8 +1,10 @@
 <template>
-    <div>About is here</div>
-  </template>
-  <script>
-  export default {
-    name: "About",
-  };
-  </script>
+  <NavigationVue> <div>About is here</div></NavigationVue>
+</template>
+<script>
+import NavigationVue from '@/components/Navigation.vue';
+export default {
+  components:{NavigationVue},
+  name: 'About',
+};
+</script>

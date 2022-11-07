@@ -1,76 +1,81 @@
 <template>
-  <Fragment class="read-index" v-if="!continueReading"
-    ><h3>Tin tức mới nhất</h3>
-    <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
-    <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
-    <ul>
-      <li>
-        Mất nhiều thời gian để tạo tài liệu so sánh đơn giá xây dựng trung tâm thương mại và lưu trữ dữ liệu sang excel
-        trong môi trường cục bộ.
-      </li>
-      <li>
-        Tất cả dữ liệu báo giá đều được phân phối và quản lý trên server dưới dạng file excel nên rất khó để trích xuất
-        dữ liệu.
-      </li>
-      <li>
-        Khách hàng muốn hệ thống hóa toàn bộ số liệu báo giá và đánh giá các báo giá này từ nhà cung cấp xây dựng qua 1
-        hệ thống.
-      </li>
-    </ul>
-    <button class="btn-continue" @click="continueReading = !continueReading">Đọc tiếp</button></Fragment
-  >
+  <NavigationVue>
+    <Fragment class="read-index" v-if="!continueReading"
+      ><h3>Tin tức mới nhất</h3>
+      <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
+      <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
+      <ul>
+        <li>
+          Mất nhiều thời gian để tạo tài liệu so sánh đơn giá xây dựng trung tâm thương mại và lưu trữ dữ liệu sang
+          excel trong môi trường cục bộ.
+        </li>
+        <li>
+          Tất cả dữ liệu báo giá đều được phân phối và quản lý trên server dưới dạng file excel nên rất khó để trích
+          xuất dữ liệu.
+        </li>
+        <li>
+          Khách hàng muốn hệ thống hóa toàn bộ số liệu báo giá và đánh giá các báo giá này từ nhà cung cấp xây dựng qua
+          1 hệ thống.
+        </li>
+      </ul>
+      <button class="btn-continue" @click="continueReading = !continueReading">Đọc tiếp</button></Fragment
+    >
 
-  <Fragment class="continue-reading" v-else>
-    <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
-    <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
+    <Fragment class="continue-reading" v-else>
+      <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
+      <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
 
-    <ul>
-      <li>
-        Mất nhiều thời gian để tạo tài liệu so sánh đơn giá xây dựng trung tâm thương mại và lưu trữ dữ liệu sang excel
-        trong môi trường cục bộ.
-      </li>
-      <li>
-        Tất cả dữ liệu báo giá đều được phân phối và quản lý trên server dưới dạng file excel nên rất khó để trích xuất
-        dữ liệu.
-      </li>
-      <li>
-        Khách hàng muốn hệ thống hóa toàn bộ số liệu báo giá và đánh giá các báo giá này từ nhà cung cấp xây dựng qua 1
-        hệ thống.
-      </li>
-    </ul>
-    <Fragment class="ol-order"
-      ><ol start="1">
+      <ul>
         <li>
-          Tạo ra một môi trường làm việc chuyên nghiệp, năng động Con người là trung tâm trong chính sách phát triển của
-          CodLUCK. Chúng tôi hướng đến việc xây dựng một môi trường trẻ trung, cởi mở – nơi mà mọi thành viên đều có thể
-          phát huy hết khả năng của mình, tô điểm cho công ty trở nên đa màu sắc nhưng vẫn giữ được tinh thần đoàn kết.
+          Mất nhiều thời gian để tạo tài liệu so sánh đơn giá xây dựng trung tâm thương mại và lưu trữ dữ liệu sang
+          excel trong môi trường cục bộ.
         </li>
         <li>
-          Mang lại sự hài lòng tuyệt đối cho Khách Hàng Khách hàng của CodLUCK sẽ được cung cấp những dịch vụ tốt nhất
-          và sự tư vấn nhiệt tình, phù hợp nhất. Chúng tôi sẽ biến lựa chọn của Khách hàng thành lựa chọn đúng đắn hơn
-          bao giờ hết.
+          Tất cả dữ liệu báo giá đều được phân phối và quản lý trên server dưới dạng file excel nên rất khó để trích
+          xuất dữ liệu.
         </li>
         <li>
-          Đóng góp cho xã hội Thế giới đang chuyển mình trong cuộc cách mạng công nghiệp 4.0. Chuyển đổi kĩ thuật số
-          (DX) đang diễn ra nhanh chóng mặt trên nhiều lĩnh vực. Sứ mệnh của chúng tôi là đóng góp vào quá trình chuyển
-          đổi kỹ thuật số của Việt Nam và của thế giới, bằng cách cung cấp các giải pháp DX phù hợp cho doanh nghiệp,
-          cho chính phủ và xã hội.
+          Khách hàng muốn hệ thống hóa toàn bộ số liệu báo giá và đánh giá các báo giá này từ nhà cung cấp xây dựng qua
+          1 hệ thống.
         </li>
-      </ol>
-      <button class="btn-continue" @click="continueReading = !continueReading">Quay lại</button>
-    </Fragment></Fragment
-  >
-  <h4 class="related-content">Danh sách liên quan</h4>
-  <div class="content-container">
-    <div class="single-content" v-for="item in tableData">
-      <img :src="item.image" alt="" class="body" />
-      <div class="title">{{ item.title }}</div>
+      </ul>
+      <Fragment class="ol-order"
+        ><ol start="1">
+          <li>
+            Tạo ra một môi trường làm việc chuyên nghiệp, năng động Con người là trung tâm trong chính sách phát triển
+            của CodLUCK. Chúng tôi hướng đến việc xây dựng một môi trường trẻ trung, cởi mở – nơi mà mọi thành viên đều
+            có thể phát huy hết khả năng của mình, tô điểm cho công ty trở nên đa màu sắc nhưng vẫn giữ được tinh thần
+            đoàn kết.
+          </li>
+          <li>
+            Mang lại sự hài lòng tuyệt đối cho Khách Hàng Khách hàng của CodLUCK sẽ được cung cấp những dịch vụ tốt nhất
+            và sự tư vấn nhiệt tình, phù hợp nhất. Chúng tôi sẽ biến lựa chọn của Khách hàng thành lựa chọn đúng đắn hơn
+            bao giờ hết.
+          </li>
+          <li>
+            Đóng góp cho xã hội Thế giới đang chuyển mình trong cuộc cách mạng công nghiệp 4.0. Chuyển đổi kĩ thuật số
+            (DX) đang diễn ra nhanh chóng mặt trên nhiều lĩnh vực. Sứ mệnh của chúng tôi là đóng góp vào quá trình
+            chuyển đổi kỹ thuật số của Việt Nam và của thế giới, bằng cách cung cấp các giải pháp DX phù hợp cho doanh
+            nghiệp, cho chính phủ và xã hội.
+          </li>
+        </ol>
+        <button class="btn-continue" @click="continueReading = !continueReading">Quay lại</button>
+      </Fragment></Fragment
+    >
+    <h4 class="related-content">Danh sách liên quan</h4>
+    <div class="content-container">
+      <div class="single-content" v-for="item in tableData">
+        <img :src="item.image" alt="" class="body" />
+        <div class="title">{{ item.title }}</div>
+      </div>
     </div>
-  </div>
+  </NavigationVue>
 </template>
 <script>
+import NavigationVue from '@/components/Navigation.vue';
 export default {
   name: 'News',
+  components: { NavigationVue },
   data() {
     return {
       continueReading: false,
@@ -140,8 +145,6 @@ export default {
     .ol-oder {
       ol {
         list-style-type: decimal;
-        ;
-
         li {
           // text-align: left !important;
           margin-bottom: 5px;
@@ -161,7 +164,7 @@ export default {
     font-size: 23px;
   }
   .shoppingMall {
-   text-align: center;
+    text-align: center;
     height: 285px;
     width: 479px;
     object-fit: cover;
@@ -190,12 +193,11 @@ export default {
 .content-container {
   clear: left;
   display: inline-block;
-  
+
   .single-content {
     float: left;
-margin-right: 10px;
-   
-    
+    margin-right: 10px;
+
     .body {
       object-fit: scale-down;
       width: 291px;

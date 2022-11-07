@@ -42,6 +42,7 @@
       <el-menu-item index="7-2" @click="handleLogout">Log out</el-menu-item>
     </el-sub-menu>
   </el-menu>
+  <el-main><slot></slot></el-main>
 </template>
 <script>
 import Login from '../views/Login.vue';

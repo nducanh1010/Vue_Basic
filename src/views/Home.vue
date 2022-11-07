@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <div>Homepage is here</div>
-    <button @click="getUserData">Click data</button>
-  </div>
+  <NavigationVue
+    ><div>
+      <div>Homepage is here</div>
+      <button @click="getUserData">Click data</button>
+    </div>
+  </NavigationVue>
 </template>
 <script>
+import NavigationVue from '@/components/Navigation.vue';
 import axios from 'axios';
 export default {
   name: 'Home',
+  components: { NavigationVue },
   data() {
     return {
       users: [],

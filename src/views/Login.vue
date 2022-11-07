@@ -1,19 +1,22 @@
 <template>
-  <div ref="userForm" class="login-container" v-if="checkAuthen === false">
-    <div class="signIn">Sign in</div>
-    <div ref="userForm" class="input-user">
-      <label for="">Username: </label>
-      <input type="text" v-model.lazy="userForm.email" />
+  <Navigation>
+    <div ref="userForm" class="login-container" v-if="checkAuthen === false">
+      <div class="signIn">Sign in</div>
+      <div ref="userForm" class="input-user">
+        <label for="">Username: </label>
+        <input type="text" v-model.lazy="userForm.email" />
+      </div>
+      <div class="input-user">
+        <label>Password: </label>
+        <input type="password" v-model.lazy="userForm.password" />
+      </div>
+      <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button>
+      <button class="btn-login" @click="handleLogin">Login</button>
     </div>
-    <div class="input-user">
-      <label>Password: </label>
-      <input type="password" v-model.lazy="userForm.password" />
-    </div>
-    <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button>
-    <button class="btn-login" @click="handleLogin">Login</button>
-  </div>
+  </Navigation>
 </template>
 <script>
+import Navigation from '@/components/Navigation.vue';
 // import loading from '@/components/Loading.vue'
 import { LOGIN } from '@/constants/actions';
 import { mapGetters } from 'vuex';
@@ -28,6 +31,7 @@ export default {
       },
     };
   },
+  components: { Navigation },
   computed: {
     ...mapGetters('auth', ['getUserId']),
     validForm() {
@@ -45,7 +49,7 @@ export default {
       this.validForm;
       this.$store
         .dispatch(`auth/${LOGIN}`, { ...this.userForm })
-        
+
         .then(() => {
           if (this.checkAuthen) {
             setTimeout(() => {
