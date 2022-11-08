@@ -1,8 +1,8 @@
 import axios from 'axios';
-import queryString from 'query-string';
-import router from '@/router';
-import { removeAuthenticated } from '@/utils/auth';
-import { createApp} from "vue";
+// import queryString from 'query-string';
+// import router from '@/router';
+// import { removeAuthenticated } from '@/utils/auth';
+// import { createApp} from "vue";
 import { authHeaders } from '@/utils/auth';
 
 const options = {

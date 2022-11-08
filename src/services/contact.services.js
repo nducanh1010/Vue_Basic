@@ -4,7 +4,7 @@ import http from '@/plugins/axios';
 class ContactService {
     getList(){
         return http
-      .get('/contacts/')
+      .get('/contacts')
       .then(res => {
         return res?.data;
       })
@@ -21,9 +21,11 @@ class ContactService {
 
   }
   update(data) {
+   
     return http
       .post('/contacts/update', data)
       .then(res => {
+        console.log(res.message)
         return res?.message;
       })
       .catch(err => {
@@ -32,7 +34,7 @@ class ContactService {
   }
   detail(id) {
     return http
-      .get(`/contacts/detail${id}`)
+      .get(`/contacts/detail/${id}`)
       .then(res => {
         return res?.data;
       })

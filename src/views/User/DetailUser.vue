@@ -1,6 +1,6 @@
 <template>
-  <NavigationVue
-    ><div class="greeting">Greeting user {{ title }} !!</div>
+  <NavigationVue>
+    <div class="greeting">Greeting user {{ title }} !!</div>
     <el-row :gutter="20">
       <el-col :span="6" :offset="8"
         ><div class="grid-content bg-purple">
@@ -35,15 +35,14 @@ import { LOGOUT } from '@/constants/actions';
 import { isEmail } from '@/utils/validate';
 
 export default {
-  computed: { NavigationVue },
   created() {
     // console.log(this.$route.params.id);
-
     userService.detail(this.$route.params.id).then(res => {
       this.userProfile = res;
       this.title = res?.name;
     });
   },
+  components: { NavigationVue },
   data() {
     return {
       shouldUpdate: false,
@@ -78,7 +77,7 @@ export default {
               message: 'Update completed',
             });
             userService.detail(this.$route.params.id).then(res => {
-              this.userProfile = res;
+              this.userProfile = res; 
               this.title = res?.name;
             });
             this.shouldUpdate = !this.shouldUpdate;

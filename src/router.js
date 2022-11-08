@@ -3,7 +3,8 @@ import {createRouter, createWebHistory } from "vue-router"
 import Home from "./views/Home.vue"
 import About from "./views/About.vue"
 import Category from "./views/Category.vue"
-import Contact from "./views/Contact.vue"
+import ContactList from "./views/Contact/ContactList.vue"
+import ContactForm from"./views/Contact/ContactForm.vue"
 import HomeWork from "./views/HomeWork.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
@@ -21,6 +22,11 @@ const routes=[
         name:"news-route",
     component:News,
     },
+    {
+        path:"/news/:id",
+        name:"newss",
+    component:News,
+    },
     // {
     //     path:"/",
     // component:Login,
@@ -34,8 +40,21 @@ const routes=[
     component:Category,
     },
     {
+        path:"/category/:id",
+    component:Category,
+    },
+    {
         path:"/contact",
-    component:Contact,
+    component:ContactForm,
+    },
+    {
+        path:"/contactList",
+    component:ContactList,
+    },
+    {
+        path:'/contactList/:id',
+        name:'contact',
+        component:ContactList
     },
     {
         path:"/homework",
@@ -65,7 +84,9 @@ const routes=[
         path:'/userprofile/:id',
         name:'userprofile',
         component:DetailUser
-    }
+    },
+    
+
     
 ];
 // const router= createRouter({    

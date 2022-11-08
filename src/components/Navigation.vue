@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    :default-active="activeIndex"
+  
     class="el-menu-demo"
     mode="horizontal"
     :ellipsis="false"
@@ -16,7 +16,7 @@
     </el-sub-menu>
   </el-menu>
   <el-menu
-    :default-active="activeIndex"
+    
     class="el-menu-demo"
     mode="horizontal"
     :ellipsis="false"
