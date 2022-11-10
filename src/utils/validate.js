@@ -19,3 +19,14 @@ export const isEmail= (emailAdress) =>{
     }
     return false;
   }
+export const isPhoneNumber=(inputtxt)=>
+{
+  var phoneno = /^\d{10}$/;
+  console.log(inputtxt.match(phoneno))
+  
+ if(inputtxt.match(phoneno)&&inputtxt.length==10||inputtxt.length==11) {
+  return true
+ }
+ return false
+}
+       

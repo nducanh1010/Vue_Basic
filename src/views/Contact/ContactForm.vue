@@ -1,6 +1,9 @@
 <template>
-  <NavigationVue
-    ><el-form
+  <NavigationVue>
+    <span @click="handlePushDetail">>> Details</span>
+    <h2 class="intro">Let us know about <span>yourself</span></h2>
+    <div style="text-align: center">Whether you have questions or you would just like to say hello, contact us.</div>
+    <el-form
       :model="ruleForm"
       :rules="rules"
       ref="ruleForm"
@@ -21,11 +24,8 @@
         <el-input v-model="ruleForm.subject"></el-input>
       </el-form-item>
 
-      <el-form-item label="Activity form" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-      </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
         <el-button @click="resetForm('ruleForm')">Reset</el-button>
       </el-form-item>
     </el-form>
@@ -33,7 +33,9 @@
 </template>
 
 <script>
+import contactService from '@/services/contact.services';
 import NavigationVue from '@/components/Navigation.vue';
+import { isEmail, isPhoneNumber } from '@/utils/validate';
 export default {
   name: 'ContactForm',
   components: { NavigationVue },
@@ -44,27 +46,51 @@ export default {
         email: '',
         phone: '',
         subject: '',
-        
       },
       rules: {
-        name: [
-          { required: true, message: 'Please input Activity name', trigger: 'blur' },
-        ],
+        name: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
         email: [{ required: true, message: 'Please select Activity zone', trigger: 'change' }],
-        phone: [{  required: true, message: 'Please fill in this field', trigger: 'change' }],
-        subject: [{  required: true, message: 'Please fill the subject', trigger: 'change' }],
+        phone: [{ required: true, message: 'Please fill in this field', trigger: 'change' }],
+        subject: [{ required: true, message: 'Please fill the subject', trigger: 'change' }],
         // resource: [{ required: true, message: 'Please select activity resource', trigger: 'change' }],
-        desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
+        // desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
       },
     };
   },
   methods: {
+    handlePushDetail() {
+      this.$router.push('/contactList');
+    },
     submitForm(formName) {
-      console.log(this.ruleForm)
-      console.log(this.$refs[formName].email);
+      if (!isEmail(this.ruleForm.email)) {
+        this.$notify.error({
+          title: 'Error',
+          message: 'Invalid Email, please re-enter !!',
+        });
+        return;
+      }
+      console.log(isPhoneNumber(this.ruleForm.phone));
+      if (!isPhoneNumber(this.ruleForm.phone)) {
+        this.$notify.error({
+          title: 'Error',
+          message: 'Your phone number must be betwenn 10-11 digits numeric',
+        });
+        return;
+      }
+
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!');
+          // alert('submit!');
+
+          contactService.create(this.ruleForm).then(res => {
+            this.$notify({
+              title: 'Success',
+              message: res,
+              type: 'success',
+            }),
+            contactService.getList()
+              this.$router.push('/contactlist');
+          });
         } else {
           console.log('error submit!!');
           return false;
@@ -78,8 +104,17 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.form-contact{
+span:hover {
+  color: #377dff;
+}
+.intro {
+  text-align: center;
+  color: #377dff;
+  margin-top: 6rem;
+}
+
+.form-contact {
   width: 30%;
-  margin: auto;
+  margin: 2.5rem auto;
 }
 </style>

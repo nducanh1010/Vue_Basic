@@ -29,12 +29,12 @@
     <el-menu-item index="3"><router-link to="/news">News</router-link></el-menu-item>
     <el-menu-item index="4"><router-link to="/about">About</router-link></el-menu-item>
     <el-menu-item index="5"> <router-link to="/contact">Contact</router-link></el-menu-item>
-    <el-sub-menu index="6">
+    <!-- <el-sub-menu index="6">
       <template #title><router-link to="/homework" style="font-size: 20px"> Extend Homework</router-link></template>
       <el-menu-item index="6-1">Text</el-menu-item>
       <el-menu-item index="6-2">Calculate</el-menu-item>
       <el-menu-item index="6-3">Contact</el-menu-item>
-    </el-sub-menu>
+    </el-sub-menu> -->
     <div class="flex-grow" />
     <el-sub-menu index="7">
       <template style="font-size: 20px" #title> User</template>

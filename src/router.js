@@ -2,10 +2,11 @@ import {createRouter, createWebHistory } from "vue-router"
 // import Login from "./views/Login.vue"
 import Home from "./views/Home.vue"
 import About from "./views/About.vue"
-import Category from "./views/Category.vue"
+// import Category from "./views/Category.vue"
+import Category from "./views/Category/CategoryList.vue"
 import ContactList from "./views/Contact/ContactList.vue"
 import ContactForm from"./views/Contact/ContactForm.vue"
-import HomeWork from "./views/HomeWork.vue"
+// import HomeWork from "./views/HomeWork.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
 import NotFound from "./views/NotFound.vue"
@@ -56,10 +57,10 @@ const routes=[
         name:'contact',
         component:ContactList
     },
-    {
-        path:"/homework",
-    component:HomeWork,
-    },
+    // {
+    //     path:"/homework",
+    // component:HomeWork,
+    // },
     {
         path:"/register",
         name:'register',
