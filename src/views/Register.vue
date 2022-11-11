@@ -28,7 +28,9 @@
         </div>
       </div>
 
-      <el-button plain @click="openNotify()" class="btn-register"> Register </el-button>
+      <!-- <el-button plain @click="openNotify()" class="btn-register"> Register </el-button> -->
+      <el-button type="success" :loading="this.loading" @click="openNotify" round>Register</el-button>
+
 
       <div class="foot-link">Already have account ? <router-link :to="{ name: 'login' }">Sign in</router-link></div>
     </div></NavigationVue
@@ -42,6 +44,7 @@ export default {
   components: { NavigationVue },
   data() {
     return {
+      loading:false,
       userForm: {
         email: '',
         name: '',
@@ -90,6 +93,7 @@ export default {
       return false;
     },
     openNotify() {
+      this.loading=true
       if (!this.isEmail(this.userForm.email)) {
         this.$notify.error({
           title: 'Error',
@@ -115,6 +119,7 @@ export default {
         return;
       }
       this.handleRegister();
+      // this.loading=true
     },
     handleRegister() {
       this.validateForm;
@@ -125,9 +130,7 @@ export default {
         .catch(error => {
           console.log(error);
         })
-        .finally(() => {
-          this.loading = false;
-        });
+        
     },
     showHidePassword() {
       this.showPassword = !this.showPassword;

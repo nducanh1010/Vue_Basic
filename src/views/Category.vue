@@ -6,7 +6,7 @@
 </template>
 <script>
 import NavigationVue from '@/components/Navigation.vue';
-import CategoryListVue from './Category/CategoryList.vue';
+import CategoryListVue from '../components/CategoryList.vue';
 export default {
   components: { NavigationVue, CategoryListVue },
   name: 'Category',

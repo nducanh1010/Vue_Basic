@@ -1,5 +1,5 @@
 <template>
-  <Navigation>
+  <NavigationVue>
     <div ref="userForm" class="login-container" v-if="checkAuthen === false">
       <div class="signIn">Sign in</div>
       <div ref="userForm" class="input-user">
@@ -15,10 +15,10 @@
       <!-- <button class="btn-login" @click="handleLogin">Login</button> -->
       <el-button type="primary" :loading="this.loading" @click="handleLogin" round>Login</el-button>
     </div>
-  </Navigation>
+  </NavigationVue>
 </template>
 <script>
-import Navigation from '@/components/Navigation.vue';
+import NavigationVue from '@/components/Navigation.vue';
 // import loading from '@/components/Loading.vue'
 import { LOGIN } from '@/constants/actions';
 import { mapGetters } from 'vuex';
@@ -33,7 +33,7 @@ export default {
       },
     };
   },
-  components: { Navigation },
+  components: { NavigationVue },
   computed: {
     ...mapGetters('auth', ['getUserId']),
     validForm() {
@@ -58,7 +58,7 @@ export default {
         .then(() => {
           if (this.checkAuthen) {
             setTimeout(() => {
-              this.$router.push('/news');
+              this.$router.push('/');
             });
           } else {
             this.$notify.error({

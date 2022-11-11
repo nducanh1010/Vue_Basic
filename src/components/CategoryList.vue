@@ -20,7 +20,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="Category information" v-model="dialogFormVisible1">
+      <el-dialog title="Category information" v-model="dialogFormVisible">
         <el-form v-model="form">
           <el-form-item label="ID" :label-width="formLabelWidth">
             <span>{{ form.id }}</span>
@@ -39,7 +39,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible1 = false">Cancel</el-button>
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="handleConfirmUpdate()">Confirm</el-button>
         </span>
       </el-dialog>
@@ -92,7 +92,7 @@ export default {
         name: '',
       },
       formLabelWidth: '120px',
-      dialogFormVisible1: false,
+      dialogFormVisible: false,
       dialogFormCreate: false,
     };
   },
@@ -163,7 +163,7 @@ export default {
       this.form.created_at = row.created_at;
       this.form.name = row.name;
       this.form.updated_at = row.updated_at;
-      this.dialogFormVisible1 = !this.dialogFormVisible1;
+      this.dialogFormVisible = !this.dialogFormVisible;
     },
   },
   //   created() {
