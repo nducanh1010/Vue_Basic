@@ -1,5 +1,13 @@
 <template>
-  <el-button @click="this.dialogFormVisible = true">Open</el-button>
+
+  <el-button @click="this.dialogFormVisible = true" type="primary" round class="btn-add">+Add</el-button>
+
+    <!-- <div >Texta</div> -->
+    <!-- <button class="test">ABC</button> -->
+
+
+  <!-- <el-button @click="this.dialogFormVisible = true" type="primary" round class="btn-add">+Add</el-button> -->
+
   <el-dialog title="News information" v-model="dialogFormVisible">
     <el-form v-model="form">
       <el-form-item label="Category Id of" :label-width="formLabelWidth">
@@ -14,19 +22,11 @@
       <el-form-item label="Content" :label-width="formLabelWidth">
         <el-input v-model="form.content" autocomplete="on"></el-input>
       </el-form-item>
-      <el-upload
-        class="upload-demo"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
-        multiple
-        :limit="3"
-        :on-exceed="handleExceed"
-        :file-list="form.image"
-      >
-        <el-button size="small" type="primary" class="upload">Click to upload</el-button>
-        <!-- <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div> -->
-      </el-upload>
+      <!-- <el-form-item :label="form.imageName" :label-width="formLabelWidth"> -->
+      <input type="file" v-on:change="handleFileChange" />
+      <el-input type="file" @change="handleFileChange" class="imageFile"></el-input>
+      <!-- </el-form-item> -->
+      <!-- <el-button size="small" type="primary" class="upload" @click="handleClick">Click to upload</el-button> -->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="handleConfirmCreate()">Create</el-button>
@@ -36,15 +36,19 @@
   </el-dialog>
 </template>
 <style lang="scss" scoped>
-.upload-demo {
-  width: 30%;
-  .upload {
-    margin-left: 10rem;
-  }
-  .dialog-footer {
-    display: flex;
-    justify-content: flex-end;
-  }
+
+.btn-add {
+  // display: flex !important;
+  margin: 10px auto;
+  display:block;
+  
+}
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+.imageFile {
+  display: none;
 }
 </style>
 <script>
@@ -57,30 +61,42 @@ export default {
     return {
       formLabelWidth: '120px',
       dialogFormVisible: false,
-      form: 
-        {
-          category_id: '',
-          title: '',
-          content: '',
-          image: '',
-        },
-      
+      form: {
+        category_id: '',
+        title: '',
+        content: '',
+        image: null,
+        imageName: '',
+      },
+
       categoryDataID: [],
-      fileList: [
-        {
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-        },
-        {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-        },
-      ],
     };
   },
+
   methods: {
+    handleClick() {
+      console.log(this.$refs.inputFile);
+      this.$refs.inputFile.input.click();
+    },
+
+    handleFileChange(event) {
+      this.form.image = event.target.files[0];
+
+      console.log(event);
+      // this.form.imageName=this.form.image.name
+      // this.form.image=event.target.file
+      // console.log(this.form.image)
+      // console.log(event);
+      // console.log(this.form.image);
+    },
+
     handleConfirmCreate() {
-      newsService.create(this.form).then(res => {
+      const formData = new FormData();
+      formData.append('category_id', this.form.category_id);
+      formData.append('title', this.form.title);
+      formData.append('content', this.form.content);
+      formData.append('image', this.form.image);
+      newsService.create(formData).then(res => {
         this.$message({
           type: 'success',
           message: res,

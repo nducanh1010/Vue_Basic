@@ -9,9 +9,13 @@ import ContactForm from"./views/Contact/ContactForm.vue"
 // import HomeWork from "./views/HomeWork.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
+import NewsDetail from"@/components/News/NewsDetail"
 import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
 import DetailUser from"./views/User/DetailUser"
+import { isLoggedIn } from '@/utils/auth';
+ const loginRoutes = ['/login'];
+
 const routes=[
     {
         path:"/",
@@ -24,9 +28,9 @@ const routes=[
     component:News,
     },
     {
-        path:"/news/:id",
-        name:"newss",
-    component:News,
+        path:"/news/detail/:id",
+        name:"news-detail",
+    component:NewsDetail,
     },
     // {
     //     path:"/",
@@ -100,5 +104,21 @@ const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
+router.beforeEach((to, from, next) => {
+    // check user login
+    if (!loginRoutes.includes(to.path) && !isLoggedIn()) {
+      next('/login');
+      return;
+    }
+  
+    if (loginRoutes.includes(to.path) && isLoggedIn()) {
+      next('/');
+      return;
+    }
+  
+ 
+  
+    next();
+  });
 
 export default router;

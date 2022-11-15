@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate';
 
 // Import modules
 import { auth } from './modules/auth.modules';
+
 // import auth from './auth'
 const store = createStore({
 	modules: {

@@ -27,8 +27,9 @@
     <el-menu-item index="1"><router-link :to="{ name: 'homepage-route' }">Home</router-link></el-menu-item>
     <el-menu-item index="2"> <router-link to="/category">Category</router-link></el-menu-item>
     <el-menu-item index="3"><router-link to="/news">News</router-link></el-menu-item>
-    <el-menu-item index="4"><router-link to="/about">About</router-link></el-menu-item>
-    <el-menu-item index="5"> <router-link to="/contact">Contact</router-link></el-menu-item>
+    <el-menu-item index="4"> <router-link to="/contact">Contact</router-link></el-menu-item>
+
+    <el-menu-item index="5"><router-link to="/about">About</router-link></el-menu-item>
     <!-- <el-sub-menu index="6">
       <template #title><router-link to="/homework" style="font-size: 20px"> Extend Homework</router-link></template>
       <el-menu-item index="6-1">Text</el-menu-item>

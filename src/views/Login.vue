@@ -10,9 +10,7 @@
         <label>Password: </label>
         <input type="password" v-model.lazy="userForm.password" />
       </div>
-      <!-- <button class="btn-register"><router-link :to="{ name: 'register' }">Register</router-link></button> -->
-      <el-button type="success" round @click="handleRegister" >Register</el-button>
-      <!-- <button class="btn-login" @click="handleLogin">Login</button> -->
+      <el-button type="success" round @click="handleRegister" >Register</el-button>      
       <el-button type="primary" :loading="this.loading" @click="handleLogin" round>Login</el-button>
     </div>
   </NavigationVue>

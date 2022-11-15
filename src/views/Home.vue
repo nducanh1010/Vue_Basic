@@ -87,11 +87,11 @@ export default {
     return {
       continueReading: false,
       tableData: [
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking' },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking' },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking' },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking' },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking' },
+        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
+        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
+        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
+        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
+        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
       ],
     };
   },

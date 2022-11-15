@@ -4,7 +4,8 @@ import store from './store/index';
 import router from './router';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import '@element-plus/icons-vue'
+// import '@element-plus/icons-vue'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // import { search } from '@element-plus/icons-vue'
 import  http  from '@/plugins/axios';
 
@@ -15,10 +16,11 @@ import  http  from '@/plugins/axios';
 const app = createApp(App)
 // app.prototype.$http=http
 app.config.globalProperties.$http = http
-// console.log(this.$http)
+
 
 app.use(ElementPlus)
 app.use(store)
-// app.use(search)
+app.use(ElementPlusIconsVue)
+
 app.use(router)
 app.mount('#app')
