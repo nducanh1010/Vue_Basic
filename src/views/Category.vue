@@ -1,7 +1,6 @@
 <template>
   <NavigationVue>
     <CategoryListVue></CategoryListVue>
-    
   </NavigationVue>
 </template>
 <script>

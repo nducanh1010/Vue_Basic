@@ -6,7 +6,7 @@ class NewsService {
         return http
       .get('/news/')
       .then(res => {
-        return res?.data?.data;
+        return res?.data;
       })
       .catch(err => {
         return Promise.reject(err);
@@ -14,9 +14,9 @@ class NewsService {
     }
   getListNewsCategory(category_id) {
     return http
-      .post('/news/list-news-category',category_id )
+      .post('/news/list-news-category',{category_id})
       .then(res => {
-        return res?.data?.data;
+        return res?.data;
       })
       .catch(err => {
         return Promise.reject(err);

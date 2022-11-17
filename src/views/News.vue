@@ -1,114 +1,57 @@
 <template>
   <NavigationVue>
-
-    <NewsFormVue></NewsFormVue>
-    <el-row :gutter="20">
-      <el-col :span="18" :offset="3"
-        ><div class="grid-content bg-purple">
-          <el-row :gutter="20">
-            <el-col :span="6" v-for="item in newsData" :key="item.id">
-              <div class="grid-content bg-purple single-news">
-                <span class="delete" @click="handleDelItem(item.id)">x</span>
-
-                <div class="title">{{ item.title }}</div>
-
-                <el-image style="width: 150px; height: 150px" :src="item.image" :fit="cover"></el-image>
-                <div>{{ item.content }}</div>
-              </div>
-            </el-col>
-          </el-row>
-        </div></el-col
-      >
-    </el-row>
-  
+    <div v-if="loading">
+      <LoadingVue></LoadingVue>
+    </div>
+    <div v-else>
+      <NewsFormVue></NewsFormVue>
+      <ListNewsVue :newsData="data.data"></ListNewsVue>
+      
+      <el-pagination
+      class="paginate"
+  background
+  layout="prev, pager, next"
+  :total="data.total*10">
+</el-pagination>
+    </div>
   </NavigationVue>
 </template>
 <script>
+import LoadingVue from '@/components/Loading.vue';
 import NavigationVue from '@/components/Navigation.vue';
 import newsService from '@/services/news.services';
 import NewsFormVue from '@/components/News/NewsForm.vue';
+import ListNewsVue from '@/components/News/ListNews.vue';
 
 export default {
   name: 'News',
-  components: { NavigationVue, NewsFormVue },
+  components: { NavigationVue, NewsFormVue, LoadingVue, ListNewsVue },
 
   created() {
-    newsService.getList().then(res => {
-      this.newsData = res;
-      console.log(this.newsData);
-    });
+    this.loading = true;
+    newsService
+      .getList()
+      .then(res => {
+        this.data = res;
+        this.loading = false;
+        console.log(this.data.total);
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
+
   data() {
     return {
-      newsData: [],
+      loading: false,
+      data: [],
       dialog: false,
     };
   },
-  methods: {
-    handleDelItem(item) {
-      
-      this.$confirm('Are you sure ?', 'Warning', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-      })
-        .then(() => {
-          // this.tableData = this.tableData.filter(item => item.id != row.id);
-          newsService.delete(item).then(res => {
-            this.$message({
-              type: 'success',
-              message: res,
-            });
-            newsService.getList().then(res => {
-              this.newsData = res;
-            });
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: 'Delete canceled',
-          });
-        });
-    },
-  },
 };
 </script>
-<style scoped lang="scss">
-
-.single-news {
-  position: relative;
-  border: 1px solid lightgrey;
-  height: 333px;
-  max-width: 200px;
-  box-shadow: 1px 1px lightgray;
-  border-radius: 3px;
-  padding: 10px;
-  margin: 0 10px;
-  text-align: right;
-  .delete {
-    font-weight: bold;
-    cursor: pointer;
-    padding-bottom: 1px;
-    position: absolute;
-    top: 0;
-  }
-  .title {
-    font-weight: 600;
-    font-size: 18px;
-    text-align: left;
-  }
-
-  .body {
-    margin-bottom: 20px;
-    height: 177px;
-    width: 161px;
-  }
+<style scoped >
+.paginate{
+  justify-content: center;
 }
-
-.img {
-  width: 100%;
-  height: auto;
-}
-// }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <el-dialog title="News information" v-model="dialogFormVisible">
     <div class="title">{{ detailNews.title }}</div>
-    <el-image style="width: 150px; height: 150px" :src="detailNews.image" :fit="cover"></el-image>
-    <div>{{ detailNews.content }}</div>
+    <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image>
+    <div>{{ detailNews.content }} </div>
   </el-dialog>
 </template>
 <script>
@@ -11,9 +11,7 @@ import newsService from '@/services/news.services';
 export default {
   name: 'newsDetail',
   created() {
-    console.log(this.detailNewsID)
     newsService.detail(this.detailNewsID).then(res => (this.detailNews = res));
-    console.log(this.detailNews)
     this.dialogFormVisible = true;
   },
   

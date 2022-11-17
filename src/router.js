@@ -10,6 +10,7 @@ import ContactForm from"./views/Contact/ContactForm.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
 import NewsDetail from"@/components/News/NewsDetail"
+import listNewCategory from"@/components/News/ListNewsCategory"
 import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
 import DetailUser from"./views/User/DetailUser"
@@ -48,6 +49,11 @@ const routes=[
         path:"/category/:id",
     component:Category,
     },
+    {
+       path:"/news/list-news-category/:id",
+    component:listNewCategory
+    },
+    
     {
         path:"/contact",
     component:ContactForm,

@@ -11,9 +11,9 @@
         </div>
       </el-carousel-item>
     </el-carousel>
-    <el-dialog title="News information" v-model="dialogFormVisible">
+    <el-dialog title="News information" v-model="dialogFormVisible" width="600px">
       <div class="title">{{ detailNews.title }}</div>
-      <el-image style="width: 150px; height: 150px" :src="detailNews.image" :fit="cover"></el-image>
+      <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image>
       <div>{{ detailNews.content }}</div>
     </el-dialog>
   </div>
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-    
+     loading:false,
       detailNews: {},
       dialogFormVisible: false,
     };
@@ -48,7 +48,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .dplay_carousel {
-  width: 60%;
+  width: 40%;
   margin: auto;
   span {
     background-color: RGB(241, 241, 241);
@@ -64,8 +64,8 @@ export default {
   .body {
     display: block;
     object-fit: scale-down;
-    height: 177px;
-    width: 161px;
+    height: 160px;
+    width: 103px;
     margin-left: auto;
     margin-right: auto;
   }

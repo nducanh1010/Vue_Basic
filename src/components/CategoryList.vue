@@ -5,7 +5,7 @@
         :data="tableData"
         style="width: 70%; margin: auto; text-align: center"
         stripe
-        @row-click="handleRowClick"
+        
       >
         <!-- <el-table-column prop="id" label="Id" width="50"> </el-table-column> -->
         <el-table-column prop="id" label="ID" width="50"> </el-table-column>

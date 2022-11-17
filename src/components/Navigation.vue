@@ -1,12 +1,5 @@
 <template>
-  <el-menu
-  
-    class="el-menu-demo"
-    mode="horizontal"
-    :ellipsis="false"
-    background-color="#8EBD78"
-    v-if="!checkAuthen"
-  >
+  <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-if="!checkAuthen">
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
 
     <div class="flex-grow" />
@@ -15,21 +8,19 @@
       <el-menu-item index="1-1"><router-link to="/login">Login</router-link></el-menu-item>
     </el-sub-menu>
   </el-menu>
-  <el-menu
-    
-    class="el-menu-demo"
-    mode="horizontal"
-    :ellipsis="false"
-    background-color="#8EBD78"
-    v-else
-  >
+  <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-else>
     <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
     <el-menu-item index="1"><router-link :to="{ name: 'homepage-route' }">Home</router-link></el-menu-item>
-    <el-menu-item index="2"> <router-link to="/category">Category</router-link></el-menu-item>
+    <el-sub-menu index="2">
+      <template #title> <span class="sub-cat">Category</span> </template>
+      <el-menu-item :index="item.index" @click="handleNavigateCategory(item.item.id)" v-for="item in categoryData">
+        {{ item.item.name }}</el-menu-item
+      >
+    </el-sub-menu>
     <el-menu-item index="3"><router-link to="/news">News</router-link></el-menu-item>
     <el-menu-item index="4"> <router-link to="/contact">Contact</router-link></el-menu-item>
 
-    <el-menu-item index="5"><router-link to="/about">About</router-link></el-menu-item>
+    <el-menu-item index="5"><router-link to="/category">Category Manager</router-link></el-menu-item>
     <!-- <el-sub-menu index="6">
       <template #title><router-link to="/homework" style="font-size: 20px"> Extend Homework</router-link></template>
       <el-menu-item index="6-1">Text</el-menu-item>
@@ -37,33 +28,49 @@
       <el-menu-item index="6-3">Contact</el-menu-item>
     </el-sub-menu> -->
     <div class="flex-grow" />
-    <el-sub-menu index="7">
+    <el-sub-menu index="6">
       <template style="font-size: 20px" #title> User</template>
-      <el-menu-item index="7-1" @click="handleProfile"> Profile</el-menu-item>
-      <el-menu-item index="7-2" @click="handleLogout">Log out</el-menu-item>
+      <el-menu-item index="6-1" @click="handleProfile"> Profile</el-menu-item>
+      <el-menu-item index="6-2" @click="handleLogout">Log out</el-menu-item>
     </el-sub-menu>
   </el-menu>
-  <el-main><slot></slot></el-main>
+  <el-main>
+    <slot></slot>
+    </el-main>
 </template>
 <script>
+import categoryService from '@/services/category.services';
 import Login from '../views/Login.vue';
 import { LOGOUT } from '@/constants/actions';
 import { mapGetters } from 'vuex';
 export default {
   name: 'Navigation',
+  created() {
+    categoryService.getList().then(res => {
+      let arr = [];
+      res.forEach((item, index) => {
+        var nextIndex = index + 1;
+        arr = [...arr, { item: item, index: `2-${nextIndex}` }];
+      });
+      this.categoryData = arr;
+    });
+  },
   data() {
     return {
       isAuthen: false,
+      categoryData: [],
     };
   },
   computed: {
     ...mapGetters('auth', ['getUserName', 'getUserEmail', 'getUserRole', 'getUserId']),
     checkAuthen() {
-      console.log(this.getUserId);
       return this.getUserId !== undefined ? true : false;
     },
   },
   methods: {
+    handleNavigateCategory(id) {
+      this.$router.push(`/news/list-news-category/${id}`);
+    },
     handleLogout() {
       this.$store
         .dispatch(`auth/${LOGOUT}`)
@@ -71,7 +78,7 @@ export default {
           this.$message({
             message,
             showClose: true,
-            duration: 10000,
+            duration: 3000,
           });
 
           setTimeout(() => {
@@ -97,11 +104,19 @@ export default {
 };
 </script>
 <style scoped>
+div {
+  text-decoration: none;
+  font-size: 20px;
+}
 a {
   text-decoration: none;
 }
 ul,
 li {
+  text-decoration: none;
+  font-size: 20px;
+}
+.sub-cat {
   text-decoration: none;
   font-size: 20px;
 }

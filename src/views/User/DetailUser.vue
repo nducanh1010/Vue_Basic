@@ -4,7 +4,7 @@
     <el-row :gutter="20">
       <el-col :span="6" :offset="8"
         ><div class="grid-content bg-purple">
-          <el-form :label-position="right" label-width="100px" :model="userProfile" size="mini">
+          <el-form label-position="right" label-width="100px" :model="userProfile" size="mini">
             <el-form-item label="User Id :">
               <span>{{ userProfile.id }}</span>
             </el-form-item>
@@ -170,7 +170,8 @@ export default {
     border-color: #409eff;
   }
   .btn-save {
-    margin-right: 2rem;
+    margin-
+    : 2rem;
     border-color: #409eff;
   }
   .btn-update:hover {

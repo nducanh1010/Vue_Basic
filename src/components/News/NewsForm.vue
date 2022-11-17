@@ -101,6 +101,7 @@ export default {
           type: 'success',
           message: res,
         });
+        this.dialogFormVisible=false
       });
     },
     handleFetchCatID() {

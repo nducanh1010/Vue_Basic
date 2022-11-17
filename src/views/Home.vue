@@ -71,27 +71,25 @@
 import NewsCartVue from '@/components/News/NewsCart.vue';
 import NavigationVue from '@/components/Navigation.vue';
 import newsService from '@/services/news.services';
-import axios from 'axios';
+
 export default {
   name: 'Home',
   components: { NavigationVue, NewsCartVue },
   // components: { NavigationVue },
   created() {
+    
     newsService.getList().then(res => {
-      console.log('res: ', res);
+    
       this.tableData = [...this.tableData, ...res];
     });
   },
 
   data() {
     return {
+      loading:false,
       continueReading: false,
       tableData: [
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
-        { content: 'Hàng siêu sale 50%', image: require('@/assets/items.png'), title: 'Phát triển hệ thống Booking',id:21 },
+       
       ],
     };
   },
