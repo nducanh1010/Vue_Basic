@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <metainfo>
+    <template v-slot:title="{ content }">{{ content ? `${content} | SITE_NAME` : `SITE_NAME` }}</template>
+  </metainfo>
     <!-- <Navigation />
     <el-main> -->
       <router-view />
@@ -8,12 +11,19 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta'
 import Navigation from './components/Navigation.vue';
 export default {
   name: 'App',
   components: {
     Navigation,
   },
+  setup () {
+    useMeta({
+      title: '',
+      htmlAttrs: { lang: 'en', amp: true }
+    })
+  }
 };
 </script>
 

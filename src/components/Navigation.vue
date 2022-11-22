@@ -1,6 +1,6 @@
 <template>
   <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-if="!checkAuthen">
-    <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
+    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
 
     <div class="flex-grow" />
     <el-sub-menu index="1">
@@ -9,7 +9,7 @@
     </el-sub-menu>
   </el-menu>
   <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-else>
-    <a href=""><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
+    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
     <el-menu-item index="1"><router-link :to="{ name: 'homepage-route' }">Home</router-link></el-menu-item>
     <el-sub-menu index="2">
       <template #title> <span class="sub-cat">Category</span> </template>
@@ -76,7 +76,7 @@ export default {
         .dispatch(`auth/${LOGOUT}`)
         .then(message => {
           this.$message({
-            message,
+            message:message,
             showClose: true,
             duration: 3000,
           });
@@ -90,7 +90,7 @@ export default {
             message: error?.response?.message,
             type: 'error',
             showClose: true,
-            duration: 10000,
+            duration: 3000,
           });
         });
     },

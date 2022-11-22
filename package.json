@@ -15,6 +15,7 @@
     "qs": "^6.11.0",
     "query-string": "^7.1.1",
     "vue": "^3.2.36",
+    "vue-meta": "^3.0.0-alpha.10",
     "vue-router": "4",
     "vuex": "^4.1.0",
     "vuex-persistedstate": "^4.1.0"

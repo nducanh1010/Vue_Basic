@@ -16,22 +16,26 @@ import Login from "./views/Login.vue"
 import DetailUser from"./views/User/DetailUser"
 import { isLoggedIn } from '@/utils/auth';
  const loginRoutes = ['/login'];
-
+ const registerRoutes = ['/register'];
+ const DEFAULT_TITLE = 'SPA';
 const routes=[
     {
         path:"/",
         name:"homepage-route",
     component:Home,
+    meta:{title:'Home'}
     },
     {
         path:"/news",
         name:"news-route",
     component:News,
+    meta:{title:'News'}
     },
     {
         path:"/news/detail/:id",
         name:"news-detail",
     component:NewsDetail,
+    meta:{title:'NewsDetail'}
     },
     // {
     //     path:"/",
@@ -40,27 +44,42 @@ const routes=[
     {
         path:"/about",
     component:About,
+    meta:{title:'About'}
     },
     {
         path:"/category",
     component:Category,
+    meta:{
+        title:'Category'
+    }
     },
     {
         path:"/category/:id",
     component:Category,
+    meta:{
+        title:'Category'
+    }
     },
     {
        path:"/news/list-news-category/:id",
-    component:listNewCategory
+    component:listNewCategory,
+    meta:{
+        title:'listNewCategory'
+    }
     },
     
     {
         path:"/contact",
     component:ContactForm,
+    meta:{
+        title:'ContactForm'
+    }
     },
     {
         path:"/contactList",
-    component:ContactList,
+    component:ContactList,meta:{
+        title:'ContactList'
+    }
     },
     {
         path:'/contactList/:id',
@@ -74,7 +93,9 @@ const routes=[
     {
         path:"/register",
         name:'register',
-    component:Register,
+    component:Register,meta:{
+        title:''
+    }
     },
     {
         path:'/:pathMatch(.*)*',
@@ -106,24 +127,30 @@ const routes=[
 //     mode: 'history'
 // })
 
+// router.afterEach((to, from) => {
+//     // Use next tick to handle router history correctly
+//     // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+//     app.nextTick(() => {
+//         document.title = `${to.meta.title}` || DEFAULT_TITLE;
+//     });
+// });
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
 })
 router.beforeEach((to, from, next) => {
-    // check user login
-    if (!loginRoutes.includes(to.path) && !isLoggedIn()) {
-      next('/login');
-      return;
-    }
-  
-    if (loginRoutes.includes(to.path) && isLoggedIn()) {
-      next('/');
-      return;
-    }
-  
- 
-  
+
+   
+        const publicPages = ['/login', '/register'];
+        const authRequired = !publicPages.includes(to.path);
+        const loggedIn = isLoggedIn()
+      
+        if (authRequired && !loggedIn) {
+          next('/');
+        } else {
+          next();
+        }
+ document.title=`${to.meta.title}`
     next();
   });
 

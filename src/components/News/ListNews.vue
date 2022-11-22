@@ -11,7 +11,7 @@
 
               <el-image style="width: 150px; height: 150px" :src="item.image" fit="cover"></el-image>
               <div class="content">{{ item.content }}</div>
-              <el-button size="mini" type="primary" round class="btn-edit">Edit</el-button>
+              <!-- <el-button size="mini" type="primary" round class="btn-edit">Edit</el-button> -->
             </div>
           </el-col>
         </el-row>
@@ -20,6 +20,7 @@
   </el-row>
 </template>
 <script>
+import newsService from '@/services/news.services';
 export default {
   name: 'ListNews',
   props: {
@@ -41,10 +42,11 @@ export default {
             this.$message({
               type: 'success',
               message: res,
-            });
+            }) 
             newsService.getList().then(res => {
               this.newsData = res;
-            });
+            })          
+           ;
           });
         })
         .catch(() => {
@@ -85,8 +87,6 @@ export default {
     font-size: 14px;
   }
   .btn-edit {
-   
-   
   }
 }
 

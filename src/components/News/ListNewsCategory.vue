@@ -22,7 +22,7 @@
           </div></el-col
         >
       </el-row>
-      <el-pagination :page-size="5" :pager-count="5" layout="prev, pager, next" :total="dataList.total * 5">
+      <el-pagination :page-size="5" :pager-count="5" layout="prev, pager, next" :total="Math.ceil(dataList.data.length/5) ">
       </el-pagination>
     </div>
   </NavigationVue>

@@ -4,14 +4,14 @@
       <LoadingVue></LoadingVue>
     </div>
     <div v-else>
-      <NewsFormVue></NewsFormVue>
+      <NewsFormVue @refreshList="handleRefresh"></NewsFormVue>
       <ListNewsVue :newsData="data.data"></ListNewsVue>
       
       <el-pagination
       class="paginate"
   background
   layout="prev, pager, next"
-  :total="data.total*10">
+  :total="Math.ceil(data.data.length/5) ">
 </el-pagination>
     </div>
   </NavigationVue>
@@ -48,10 +48,17 @@ export default {
       dialog: false,
     };
   },
+  methods:{
+    handleRefresh(dataRefresh){
+      this.data=dataRefresh
+    }
+
+  }
 };
 </script>
 <style scoped >
 .paginate{
+  margin-top: 2rem;
   justify-content: center;
 }
 </style>

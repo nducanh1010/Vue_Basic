@@ -24,7 +24,7 @@
       </el-form-item>
       <!-- <el-form-item :label="form.imageName" :label-width="formLabelWidth"> -->
       <input type="file" v-on:change="handleFileChange" />
-      <el-input type="file" @change="handleFileChange" class="imageFile"></el-input>
+     
       <!-- </el-form-item> -->
       <!-- <el-button size="small" type="primary" class="upload" @click="handleClick">Click to upload</el-button> -->
     </el-form>
@@ -101,6 +101,7 @@ export default {
           type: 'success',
           message: res,
         });
+        newsService.getList().then(res=>this.$emit('refreshList',res))
         this.dialogFormVisible=false
       });
     },

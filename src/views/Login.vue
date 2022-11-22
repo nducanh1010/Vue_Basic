@@ -41,6 +41,7 @@ export default {
     checkAuthen() {
       return this.getUserId !== undefined ? true : false;
     },
+    
   },
   methods: {
     // ...mapMutations(['TOGGLE_AUTH']),

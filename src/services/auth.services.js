@@ -33,7 +33,7 @@ class AuthService {
     return http
       .post('/logout')
       .then(res => {
-        console.log(res.message)
+        console.log('Log out!',res.message)
         return res?.message;
       })
       .catch(err => {

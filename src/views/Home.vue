@@ -80,7 +80,7 @@ export default {
     
     newsService.getList().then(res => {
     
-      this.tableData = [...this.tableData, ...res];
+      this.tableData = [...this.tableData, ...res.data];
     });
   },
 
