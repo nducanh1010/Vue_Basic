@@ -3,10 +3,7 @@
     <metainfo>
     <template v-slot:title="{ content }">{{ content ? `${content} | SITE_NAME` : `SITE_NAME` }}</template>
   </metainfo>
-    <!-- <Navigation />
-    <el-main> -->
       <router-view />
-    <!-- </el-main> -->
   </div>
 </template>
 
@@ -33,6 +30,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 
   color: #2c3e50;
-  /* background-color: rgb(238, 223, 182); */
 }
 </style>

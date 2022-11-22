@@ -28,7 +28,6 @@
         </div>
       </div>
 
-      <!-- <el-button plain @click="openNotify()" class="btn-register"> Register </el-button> -->
       <el-button type="success" :loading="this.loading" @click="openNotify" round>Register</el-button>
 
 

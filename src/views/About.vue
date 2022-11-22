@@ -1,17 +1,12 @@
 <template>
   <NavigationVue>
-    <!-- <div v-if="loading">
-      <LoadingVue />
-    </div> -->
-<NewsFormVue></NewsFormVue>
+    <NewsFormVue></NewsFormVue>
   </NavigationVue>
 </template>
 <script>
 import NewsFormVue from '@/components/News/NewsForm.vue';
 import LoadingVue from '@/components/Loading.vue';
 import NavigationVue from '@/components/Navigation.vue';
-import NewsForm from '@/components/News/NewsForm.vue';
-// import { fa } from 'element-plus/es/locale';
 export default {
   created() {
     setTimeout(() => {
@@ -25,7 +20,7 @@ export default {
     };
   },
 
-  components: { NavigationVue, LoadingVue,NewsFormVue },
+  components: { NavigationVue, LoadingVue, NewsFormVue },
   name: 'About',
 };
 </script>

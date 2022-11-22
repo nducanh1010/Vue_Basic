@@ -14,7 +14,7 @@
         <el-table-column prop="updated_at" label="Updated"> </el-table-column>
         <el-table-column label="Operations">
           <template v-slot="scope">
-            <el-button slot="reference" type="primary" @click="handledialogForm(scope.row)">Edit</el-button>
+            <el-button slot="reference" type="primary" class="" @click="handledialogForm(scope.row)">Edit</el-button>
 
             <el-button type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
           </template>

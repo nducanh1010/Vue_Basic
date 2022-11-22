@@ -1,9 +1,9 @@
 <template>
   <NavigationVue>
-    <Fragment class="read-index" v-if="!continueReading"
+    <div class="read-index" v-if="!continueReading"
       ><h3>Tin tức mới nhất</h3>
       <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
-      <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
+      <h4 class="text-green-500">Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
       <ul>
         <li>
           Mất nhiều thời gian để tạo tài liệu so sánh đơn giá xây dựng trung tâm thương mại và lưu trữ dữ liệu sang
@@ -18,10 +18,10 @@
           1 hệ thống.
         </li>
       </ul>
-      <button class="btn-continue" @click="continueReading = !continueReading">Đọc tiếp</button></Fragment
+      <button class="btn-continue" @click="continueReading = !continueReading">Đọc tiếp</button></div
     >
 
-    <Fragment class="continue-reading" v-else>
+    <div class="continue-reading" v-else>
       <h4>Phát Triển & Tích Hợp Hệ Thống Quản Lý Trung Tâm Thương Mại</h4>
       <img class="shoppingMall" src="../assets/shoppingMall.png" alt="" />
 
@@ -39,7 +39,7 @@
           1 hệ thống.
         </li>
       </ul>
-      <Fragment class="ol-order"
+      <div class="ol-order"
         ><ol start="1">
           <li>
             Tạo ra một môi trường làm việc chuyên nghiệp, năng động Con người là trung tâm trong chính sách phát triển
@@ -60,7 +60,7 @@
           </li>
         </ol>
         <button class="btn-continue" @click="continueReading = !continueReading">Quay lại</button>
-      </Fragment></Fragment
+      </div></div
     >
     <h4 class="related-content">Danh sách liên quan</h4>
 

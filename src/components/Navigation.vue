@@ -1,7 +1,6 @@
 <template>
   <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-if="!checkAuthen">
-    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
-
+    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand " alt="" /></a>
     <div class="flex-grow" />
     <el-sub-menu index="1">
       <template style="font-size: 20px" #title> User</template>
@@ -21,12 +20,6 @@
     <el-menu-item index="4"> <router-link to="/contact">Contact</router-link></el-menu-item>
 
     <el-menu-item index="5"><router-link to="/category">Category Manager</router-link></el-menu-item>
-    <!-- <el-sub-menu index="6">
-      <template #title><router-link to="/homework" style="font-size: 20px"> Extend Homework</router-link></template>
-      <el-menu-item index="6-1">Text</el-menu-item>
-      <el-menu-item index="6-2">Calculate</el-menu-item>
-      <el-menu-item index="6-3">Contact</el-menu-item>
-    </el-sub-menu> -->
     <div class="flex-grow" />
     <el-sub-menu index="6">
       <template style="font-size: 20px" #title> User</template>

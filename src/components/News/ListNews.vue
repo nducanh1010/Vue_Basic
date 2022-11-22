@@ -9,7 +9,7 @@
 
               <div class="title">{{ item.title }}</div>
 
-              <el-image style="width: 150px; height: 150px" :src="item.image" fit="cover"></el-image>
+              <el-image style="width: 150px; height: 150px" :src="item.image"  fit="cover"></el-image>
               <div class="content">{{ item.content }}</div>
               <!-- <el-button size="mini" type="primary" round class="btn-edit">Edit</el-button> -->
             </div>

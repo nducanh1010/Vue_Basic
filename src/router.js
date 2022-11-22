@@ -1,12 +1,9 @@
 import {createRouter, createWebHistory } from "vue-router"
-// import Login from "./views/Login.vue"
 import Home from "./views/Home.vue"
 import About from "./views/About.vue"
-// import Category from "./views/Category.vue"
 import Category from "./components/CategoryList.vue"
 import ContactList from "./views/Contact/ContactList.vue"
 import ContactForm from"./views/Contact/ContactForm.vue"
-// import HomeWork from "./views/HomeWork.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
 import NewsDetail from"@/components/News/NewsDetail"
@@ -15,9 +12,7 @@ import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
 import DetailUser from"./views/User/DetailUser"
 import { isLoggedIn } from '@/utils/auth';
- const loginRoutes = ['/login'];
- const registerRoutes = ['/register'];
- const DEFAULT_TITLE = 'SPA';
+
 const routes=[
     {
         path:"/",
@@ -37,7 +32,7 @@ const routes=[
     component:NewsDetail,
     meta:{title:'NewsDetail'}
     },
-    // {
+// {
     //     path:"/",
     // component:Login,
     // },
@@ -86,10 +81,7 @@ const routes=[
         name:'contact',
         component:ContactList
     },
-    // {
-    //     path:"/homework",
-    // component:HomeWork,
-    // },
+   
     {
         path:"/register",
         name:'register',
@@ -121,19 +113,6 @@ const routes=[
 
     
 ];
-// const router= createRouter({    
-//     history:createWebHashHistory(process.env.BASE_URL),
-//     routes,
-//     mode: 'history'
-// })
-
-// router.afterEach((to, from) => {
-//     // Use next tick to handle router history correctly
-//     // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
-//     app.nextTick(() => {
-//         document.title = `${to.meta.title}` || DEFAULT_TITLE;
-//     });
-// });
 const router = createRouter({
     history: createWebHistory(),
     routes: routes
@@ -146,12 +125,12 @@ router.beforeEach((to, from, next) => {
         const loggedIn = isLoggedIn()
       
         if (authRequired && !loggedIn) {
-          next('/');
+          next('/login');
         } else {
           next();
         }
  document.title=`${to.meta.title}`
     next();
   });
-
+    
 export default router;
