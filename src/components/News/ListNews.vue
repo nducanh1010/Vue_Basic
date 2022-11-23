@@ -3,13 +3,13 @@
     <el-col :span="18" :offset="3">
       <div class="grid-content bg-purple">
         <el-row :gutter="20">
-          <el-col :span="4" v-for="item in newsData" :key="item.id">
-            <div class="grid-content bg-purple single-news">
+          <el-col :span="4" v-for="item in ListDataNews" :key="item.id">
+            <div class="grid-content bg-purple single-news" @click="showDetail(item)">
               <span class="delete" @click="handleDelItem(item.id)">x</span>
 
               <div class="title">{{ item.title }}</div>
 
-              <el-image style="width: 150px; height: 150px" :src="item.image"  fit="cover"></el-image>
+              <el-image style="width: 150px; height: 150px" :src="item.image" fit="cover"></el-image>
               <div class="content">{{ item.content }}</div>
               <!-- <el-button size="mini" type="primary" round class="btn-edit">Edit</el-button> -->
             </div>
@@ -18,18 +18,48 @@
       </div></el-col
     >
   </el-row>
+  <el-dialog title="News information" v-model="dialogFormVisible" width="420px">
+    <!-- <div>{{ detailNews.id }}</div> -->
+    <span>{{ detailNews.title }}</span>
+    <!-- <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image> -->
+    <img class="float-left object-scale-down h-28 w-28 mr-3" :src="detailNews.image" />
+    <ul class="list-none">
+      <li>ID : {{ detailNews.id }}</li>
+      <li>{{ detailNews.content }}</li>
+    </ul>
+
+    <UpdateNewsVue :detailNews="detailNews" @refreshListFromUpdate="handleRefresh"></UpdateNewsVue>
+  </el-dialog>
 </template>
 <script>
+import UpdateNewsVue from '@/components/News/UpdateNews.vue';
 import newsService from '@/services/news.services';
 export default {
   name: 'ListNews',
+  components: { UpdateNewsVue },
   props: {
     newsData: {
       type: Object,
       default: () => {},
     },
   },
+  data() {
+    return {
+      ListDataNews:this.newsData,
+      detailNews: {},
+      dialogFormVisible: false,
+    };
+  },
   methods: {
+    handleRefresh(data) {
+      console.log('Refresh:',data.data)
+ 
+      this.ListDataNews = data.data;
+    },
+    showDetail(item) {
+      this.dialogFormVisible = true;
+      this.detailNews = item;
+    },
     handleDelItem(item) {
       this.$confirm('Are you sure ?', 'Warning', {
         confirmButtonText: 'OK',
@@ -38,15 +68,14 @@ export default {
       })
         .then(() => {
           // this.tableData = this.tableData.filter(item => item.id != row.id);
-          newsService.delete(item).then(res => {
+          newsService.delete(item).then((res) => {
             this.$message({
               type: 'success',
               message: res,
-            }) 
+            });
             newsService.getList().then(res => {
-              this.newsData = res;
-            })          
-           ;
+              this.ListDataNews = res;
+            });
           });
         })
         .catch(() => {
@@ -86,12 +115,5 @@ export default {
     margin-top: 3px;
     font-size: 14px;
   }
-  .btn-edit {
-  }
-}
-
-.img {
-  width: 100%;
-  height: auto;
 }
 </style>

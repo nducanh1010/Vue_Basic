@@ -6,7 +6,6 @@ import ContactList from "./views/Contact/ContactList.vue"
 import ContactForm from"./views/Contact/ContactForm.vue"
 import Register from "./views/Register.vue"
 import News from "./views/News.vue"
-import NewsDetail from"@/components/News/NewsDetail"
 import listNewCategory from"@/components/News/ListNewsCategory"
 import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
@@ -26,16 +25,6 @@ const routes=[
     component:News,
     meta:{title:'News'}
     },
-    {
-        path:"/news/detail/:id",
-        name:"news-detail",
-    component:NewsDetail,
-    meta:{title:'NewsDetail'}
-    },
-// {
-    //     path:"/",
-    // component:Login,
-    // },
     {
         path:"/about",
     component:About,
@@ -59,7 +48,7 @@ const routes=[
        path:"/news/list-news-category/:id",
     component:listNewCategory,
     meta:{
-        title:'listNewCategory'
+        title:'Category'
     }
     },
     
@@ -86,7 +75,7 @@ const routes=[
         path:"/register",
         name:'register',
     component:Register,meta:{
-        title:''
+        title:'Register'
     }
     },
     {
@@ -97,17 +86,19 @@ const routes=[
     {
         path:'/login',
         name:'login',
-        component:Login
+        component:Login,
+        meta:{
+            title:'Login'
+        }
     },
-    {
-        path:'/login/:id',
-        name:'loginid',
-        component:Login
-    },
+ 
     {
         path:'/userprofile/:id',
         name:'userprofile',
-        component:DetailUser
+        component:DetailUser,
+        meta:{
+            title:'Profile'
+        }
     },
     
 

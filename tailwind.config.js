@@ -3,9 +3,8 @@ module.exports = {
   corePlugins: {
     preflight: false
   },
-  purge:['./index.html','./src/**/*.{vue,js,ts}'],
   mode:'jit',
-  content: [],
+  content: ['./index.html','./src/**/*.{vue,js,ts}'],
   theme: {
     screens: {
       xs: '0px',

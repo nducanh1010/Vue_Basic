@@ -1,13 +1,6 @@
 <template>
 
   <el-button @click="this.dialogFormVisible = true" type="primary" round class="btn-add">+Add</el-button>
-
-    <!-- <div >Texta</div> -->
-    <!-- <button class="test">ABC</button> -->
-
-
-  <!-- <el-button @click="this.dialogFormVisible = true" type="primary" round class="btn-add">+Add</el-button> -->
-
   <el-dialog title="News information" v-model="dialogFormVisible">
     <el-form v-model="form">
       <el-form-item label="Category Id of" :label-width="formLabelWidth">
@@ -56,9 +49,11 @@ import newsService from '@/services/news.services';
 import categoryService from '@/services/category.services';
 
 export default {
+  emits:['refreshList'],
   name: 'newsForm',
   data() {
     return {
+      openNewsUpdate:false,
       formLabelWidth: '120px',
       dialogFormVisible: false,
       form: {
@@ -81,13 +76,6 @@ export default {
 
     handleFileChange(event) {
       this.form.image = event.target.files[0];
-
-      console.log(event);
-      // this.form.imageName=this.form.image.name
-      // this.form.image=event.target.file
-      // console.log(this.form.image)
-      // console.log(event);
-      // console.log(this.form.image);
     },
 
     handleConfirmCreate() {
@@ -115,13 +103,7 @@ export default {
       this.form.image = file;
       this.dialogVisible = true;
     },
-    handleExceed(files, fileList) {
-      this.$message.warning(
-        `The limit is 3, you selected ${files.length} files this time, add up to ${
-          files.length + fileList.length
-        } totally`,
-      );
-    },
+  
     beforeRemove(file, fileList) {
       return this.$confirm(`Cancel the transfer of ${file.name} ?`);
     },

@@ -4,6 +4,7 @@
       <LoadingVue></LoadingVue>
     </div>
     <div v-else>
+      
       <NewsFormVue @refreshList="handleRefresh"></NewsFormVue>
       <ListNewsVue :newsData="data.data"></ListNewsVue>
       
@@ -17,6 +18,7 @@
   </NavigationVue>
 </template>
 <script>
+
 import LoadingVue from '@/components/Loading.vue';
 import NavigationVue from '@/components/Navigation.vue';
 import newsService from '@/services/news.services';
