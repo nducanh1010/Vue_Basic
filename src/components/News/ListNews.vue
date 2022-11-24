@@ -1,31 +1,28 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="18" :offset="3">
-      <div class="grid-content bg-purple">
-        <el-row :gutter="20">
-          <el-col :span="4" v-for="item in ListDataNews" :key="item.id">
-            <div class="grid-content bg-purple single-news" @click="showDetail(item)">
-              <span class="delete" @click="handleDelItem(item.id)">x</span>
+      <el-row :gutter="20">
+        <el-col :span="4" v-for="item in newsData" :key="item.id" class="items-stretch">
+          <div class="rounded border border-current text-sm relative h-80 shadow-slate-600" @click="showDetail(item)">
+            <span class="delete float-right font-bold cursor-pointer mr-1" @click="handleDelItem(item.id)">x</span>
 
-              <div class="title">{{ item.title }}</div>
+            <div class="title font-bold clear-right ml-1">{{ item.title }}</div>
 
-              <el-image style="width: 150px; height: 150px" :src="item.image" fit="cover"></el-image>
-              <div class="content">{{ item.content }}</div>
-              <!-- <el-button size="mini" type="primary" round class="btn-edit">Edit</el-button> -->
-            </div>
-          </el-col>
-        </el-row>
-      </div></el-col
-    >
+            <el-image class="w-28 h-28 object-scale-down" :src="item.image"></el-image>
+            <div class="absolute overflow-hidden text-ellipsis mx-1 mt-1">{{ item.content }}</div>
+          </div>
+        </el-col>
+      </el-row>
+    </el-col>
   </el-row>
   <el-dialog title="News information" v-model="dialogFormVisible" width="420px">
     <!-- <div>{{ detailNews.id }}</div> -->
-    <span>{{ detailNews.title }}</span>
+    <span class="font-bold">{{ detailNews.title }}</span>
     <!-- <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image> -->
     <img class="float-left object-scale-down h-28 w-28 mr-3" :src="detailNews.image" />
     <ul class="list-none">
       <li>ID : {{ detailNews.id }}</li>
-      <li>{{ detailNews.content }}</li>
+      <li class="break-normal">{{ detailNews.content }}</li>
     </ul>
 
     <UpdateNewsVue :detailNews="detailNews" @refreshListFromUpdate="handleRefresh"></UpdateNewsVue>
@@ -39,24 +36,28 @@ export default {
   components: { UpdateNewsVue },
   props: {
     newsData: {
-      type: Object,
-      default: () => {},
+      type: Array,
+      default: () => [],
     },
   },
   data() {
     return {
-      ListDataNews:this.newsData,
       detailNews: {},
       dialogFormVisible: false,
     };
   },
   methods: {
     handleRefresh(data) {
-      console.log('Refresh:',data.data)
- 
-      this.ListDataNews = data.data;
+      this.detailNews = data;
+      let objIndex = this.newsData.findIndex(item => item.id === data.id);
+      console.log(objIndex);
+      this.newsData[objIndex].id = data.id;
+      this.newsData[objIndex].title = data.title;
+      this.newsData[objIndex].image = data.image;
+      this.newsData[objIndex].content = data.content;
     },
     showDetail(item) {
+      console.log('Log data form show', this.newsData);
       this.dialogFormVisible = true;
       this.detailNews = item;
     },
@@ -68,13 +69,13 @@ export default {
       })
         .then(() => {
           // this.tableData = this.tableData.filter(item => item.id != row.id);
-          newsService.delete(item).then((res) => {
+          newsService.delete(item).then(res => {
             this.$message({
               type: 'success',
               message: res,
             });
             newsService.getList().then(res => {
-              this.ListDataNews = res;
+              this.newsData = res;
             });
           });
         })
@@ -90,7 +91,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .single-news {
-  position: relative;
   border: 1px solid lightgrey;
   height: 333px;
   max-width: 200px;

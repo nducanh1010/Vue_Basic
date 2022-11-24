@@ -11,7 +11,7 @@ export const authHeaders = (headers = {}) => {
   };
   
   export const isLoggedIn = () => {
-    console.log('is lg in',!!localStorage.getItem('master_user')&& !!JSON.parse(localStorage.getItem('master_user'))?.auth?.user?.token )
+    // console.log('is lg in',!!localStorage.getItem('master_user')&& !!JSON.parse(localStorage.getItem('master_user'))?.auth?.user?.token )
     return !!localStorage.getItem('master_user') && !!JSON.parse(localStorage.getItem('master_user'))?.auth?.user?.token;
   };
   

@@ -9,14 +9,14 @@
           ><div class="grid-content bg-purple">
             <el-row :gutter="10">
               <el-col :span="4" v-for="item in dataList.data" :key="item.id">
-                <div class="grid-content bg-purple single-news">
-                  <span class="delete" @click="handleDelItem(item.id)">x</span>
+                <div class="  rounded  border border-current text-sm relative h-80 shadow-slate-600   " @click="showDetail(item)">
+              <span class="delete float-right font-bold cursor-pointer mr-1" @click="handleDelItem(item.id)">x</span>
 
-                  <div class="title">{{ item.title }}</div>
+              <div class="title font-bold clear-right ml-1">{{ item.title }}</div>
 
-                  <el-image style="width: 150px; height: 150px" :src="item.image" fit="cover"></el-image>
-                  <div>{{ item.content }}</div>
-                </div>
+              <el-image class="w-28 h-28 object-scale-down" :src="item.image" ></el-image>
+              <div class="absolute overflow-hidden text-ellipsis mx-1 mt-1">{{ item.content }}</div>
+            </div>
               </el-col>
             </el-row>
           </div></el-col

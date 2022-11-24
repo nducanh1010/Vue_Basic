@@ -22,6 +22,16 @@ class NewsService {
         return Promise.reject(err);
       });
   }
+  nextpage(page){
+    return http
+    .get(`/news?page=${page}`)
+    .then(res => {
+      return res?.data;
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
+  }
   create(data){
     return http.post('/news/create',data)
     .then(res=> {return res?.message})
@@ -60,6 +70,7 @@ class NewsService {
         return Promise.reject(err); 
       });
   }
+ 
 }
 
 const newsService = new NewsService();

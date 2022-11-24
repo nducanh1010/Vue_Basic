@@ -4,21 +4,21 @@
       <LoadingVue></LoadingVue>
     </div>
     <div v-else>
-      
       <NewsFormVue @refreshList="handleRefresh"></NewsFormVue>
       <ListNewsVue :newsData="data.data"></ListNewsVue>
-      
+
       <el-pagination
-      class="paginate"
-  background
-  layout="prev, pager, next"
-  :total="Math.ceil(data.data.length/5) ">
-</el-pagination>
+        class="paginate"
+        @current-change="handleCurrentchange"
+        background
+        layout="prev, pager, next"
+        :total="Math.ceil(data.total)"
+      >
+      </el-pagination>
     </div>
   </NavigationVue>
 </template>
 <script>
-
 import LoadingVue from '@/components/Loading.vue';
 import NavigationVue from '@/components/Navigation.vue';
 import newsService from '@/services/news.services';
@@ -36,7 +36,6 @@ export default {
       .then(res => {
         this.data = res;
         this.loading = false;
-        console.log(this.data.total);
       })
       .catch(() => {
         this.loading = false;
@@ -50,16 +49,22 @@ export default {
       dialog: false,
     };
   },
-  methods:{
-    handleRefresh(dataRefresh){
-      this.data=dataRefresh
-    }
+  methods: {
+    handleCurrentchange(val) {
+      newsService.nextpage(val).then(response => {
+        this.data = response;
 
-  }
+        // console.log('nextpage:', this.data)
+      });
+    },
+    handleRefresh(dataRefresh) {
+      this.data = dataRefresh;
+    },
+  },
 };
 </script>
-<style scoped >
-.paginate{
+<style scoped>
+.paginate {
   margin-top: 2rem;
   justify-content: center;
 }

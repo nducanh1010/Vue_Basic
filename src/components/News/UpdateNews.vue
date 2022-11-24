@@ -12,6 +12,7 @@
         <!-- <el-input v-model="form.content" autocomplete="on"></el-input> -->
         <el-input
           type="textarea"
+          class="break-normal"
           :autosize="{ minRows: 2, maxRows: 4 }"
           placeholder="Please input"
           v-model="form.content"
@@ -72,7 +73,7 @@ export default {
           type: 'success',
           message: res,
         });
-        newsService.getList().then(res => this.$emit('refreshListFromUpdate', res));
+        newsService.detail(this.form.id).then(res => this.$emit('refreshListFromUpdate', res));
         this.dialogFormVisible = false;
       });
     },

@@ -60,7 +60,9 @@ class CategoryService {
         return Promise.reject(err); 
       });
   }
-}
+  
+  }
+
 
 const categoryService = new CategoryService();
 
