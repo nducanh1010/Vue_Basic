@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <NewsFormVue @refreshList="handleRefresh"></NewsFormVue>
-      <ListNewsVue :newsData="data.data" @refreshDel="handleRefDel"></ListNewsVue>
+      <ListNewsVue :newsData="data.data" @refreshDelete="handleRefreshDelete"></ListNewsVue>
 
       <el-pagination
         class="paginate"
@@ -57,7 +57,7 @@ export default {
         // console.log('nextpage:', this.data)
       });
     },
-    handleRefDel(dataRefreshDel) {
+    handleRefreshDelete(dataRefreshDel) {
       this.data = dataRefreshDel;
     },
     handleRefresh(dataRefresh) {

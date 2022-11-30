@@ -1,6 +1,6 @@
 <template>
   <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" background-color="#8EBD78" v-if="!checkAuthen">
-    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand " alt="" /></a>
+    <a href="/"><img src="@/assets/logo@2x.png" class="logo-brand" alt="" /></a>
     <div class="flex-grow" />
     <el-sub-menu index="1">
       <template style="font-size: 20px" #title> User</template>
@@ -12,7 +12,7 @@
     <el-menu-item index="1"><router-link :to="{ name: 'homepage-route' }">Home</router-link></el-menu-item>
     <el-sub-menu index="2">
       <template #title> <span class="sub-cat">Category</span> </template>
-      <el-menu-item :index="item.index" @click="handleNavigateCategory(item.item.id)" v-for="item in categoryData">
+      <el-menu-item :index="item.index" @click="handleNavigateCategory(item.item)" v-for="item in categoryData">
         {{ item.item.name }}</el-menu-item
       >
     </el-sub-menu>
@@ -29,9 +29,10 @@
   </el-menu>
   <el-main>
     <slot></slot>
-    </el-main>
+  </el-main>
 </template>
 <script>
+import { useTitle } from '@vueuse/core';
 import categoryService from '@/services/category.services';
 import Login from '../views/Login.vue';
 import { LOGOUT } from '@/constants/actions';
@@ -50,6 +51,7 @@ export default {
   },
   data() {
     return {
+      title: '',
       isAuthen: false,
       categoryData: [],
     };
@@ -61,15 +63,17 @@ export default {
     },
   },
   methods: {
-    handleNavigateCategory(id) {
-      this.$router.push(`/news/list-news-category/${id}`);
+    handleNavigateCategory(item) {
+      this.title = item.name
+      this.$router.push(`/news/list-news-category/${item.id}`);
+      useTitle(this.title);
     },
     handleLogout() {
       this.$store
         .dispatch(`auth/${LOGOUT}`)
         .then(message => {
           this.$message({
-            message:message,
+            message: message,
             showClose: true,
             duration: 3000,
           });

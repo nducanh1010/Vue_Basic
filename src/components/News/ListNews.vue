@@ -80,7 +80,7 @@ export default {
               message: res,
             });
             newsService.getList().then(res => {
-              this.$emit("refreshDel",res)
+              this.$emit("refreshDelete",res)
             });
           });
         })

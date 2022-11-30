@@ -11,6 +11,7 @@ import NotFound from "./views/NotFound.vue"
 import Login from "./views/Login.vue"
 import DetailUser from"./views/User/DetailUser"
 import { isLoggedIn } from '@/utils/auth';
+import { useTitle } from "@vueuse/core"
 
 const routes=[
     {
@@ -47,9 +48,7 @@ const routes=[
     {
        path:"/news/list-news-category/:id",
     component:listNewCategory,
-    meta:{
-        title:'Category'
-    }
+    
     },
     
     {
@@ -120,7 +119,8 @@ router.beforeEach((to, from, next) => {
         } else {
           next();
         }
- document.title=`${to.meta.title}`
+ useTitle(to.meta.title)
+
     next();
   });
     
