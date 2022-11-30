@@ -12,15 +12,12 @@
       </el-carousel-item>
     </el-carousel>
     <el-dialog title="News information" v-model="dialogFormVisible" width="420px">
-    <!-- <div>{{ detailNews.id }}</div> -->
-    <span>{{ detailNews.title }}</span>
-    <!-- <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image> -->
+    <span class="font-bold break-normal ">{{ detailNews.title }}</span>
     <img class="float-left object-scale-down h-28 w-28 mr-3" :src="detailNews.image" />
     <ul class="list-none">
       <li>ID : {{ detailNews.id }}</li>
       <li class="break-normal">{{ detailNews.content }}</li>
     </ul>
-
     
   </el-dialog>
   </div>
@@ -58,7 +55,7 @@ export default {
   width: 40%;
   margin: auto;
   span {
-    background-color: RGB(241, 241, 241);
+    
 
     font-size: 14px;
   }

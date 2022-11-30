@@ -3,12 +3,17 @@
     <el-col :span="18" :offset="3">
       <el-row :gutter="20">
         <el-col :span="4" v-for="item in newsData" :key="item.id" class="items-stretch">
-          <div class="rounded border border-current text-sm relative h-80 shadow-slate-600" @click="showDetail(item)">
-            <span class="delete float-right font-bold cursor-pointer mr-1" @click="handleDelItem(item.id)">x</span>
+          <div
+            class="rounded border border-current text-sm relative h-80 shadow-slate-600 mb-3"
+            :lg="16"
+            :md="12"
+            :xs="24"
+          >
+            <span class="float-right font-semibold cursor-pointer mr-1" @click="handleDelItem(item.id)">x</span>
 
-            <div class="title font-bold clear-right ml-1">{{ item.title }}</div>
+            <div class="text-xs text-left font-bold clear-right ml-1">{{ item.title }}</div>
 
-            <el-image class="w-28 h-28 object-scale-down" :src="item.image"></el-image>
+            <el-image class="w-24 h-auto object-scale-down" :src="item.image" @click="showDetail(item)"></el-image>
             <div class="absolute overflow-hidden text-ellipsis mx-1 mt-1">{{ item.content }}</div>
           </div>
         </el-col>
@@ -17,7 +22,7 @@
   </el-row>
   <el-dialog title="News information" v-model="dialogFormVisible" width="420px">
     <!-- <div>{{ detailNews.id }}</div> -->
-    <span class="font-bold">{{ detailNews.title }}</span>
+    <span class="font-bold break-normal">{{ detailNews.title }}</span>
     <!-- <el-image style="width: 150px; height: 150px" :src="detailNews.image" fit="cover"></el-image> -->
     <img class="float-left object-scale-down h-28 w-28 mr-3" :src="detailNews.image" />
     <ul class="list-none">
@@ -75,7 +80,7 @@ export default {
               message: res,
             });
             newsService.getList().then(res => {
-              this.newsData = res;
+              this.$emit("refreshDel",res)
             });
           });
         })
@@ -89,31 +94,4 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss">
-.single-news {
-  border: 1px solid lightgrey;
-  height: 333px;
-  max-width: 200px;
-  box-shadow: 1px 1px lightgray;
-  border-radius: 3px;
-  padding: 10px;
-  margin: 0 10px;
-  text-align: right;
-  .delete {
-    font-weight: bold;
-    cursor: pointer;
-    padding-bottom: 1px;
-    position: absolute;
-    top: 0;
-  }
-  .title {
-    font-weight: 600;
-    font-size: 16px;
-    text-align: left;
-  }
-  .content {
-    margin-top: 3px;
-    font-size: 14px;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

@@ -32,6 +32,16 @@ class NewsService {
       return Promise.reject(err);
     });
   }
+  nextpageLstNews(page){
+    return http
+    .get(`/news/list-news-category?page=${page}`)
+    .then(res => {
+      return res?.data;
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
+  }
   create(data){
     return http.post('/news/create',data)
     .then(res=> {return res?.message})

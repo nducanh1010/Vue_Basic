@@ -9,21 +9,32 @@
           ><div class="grid-content bg-purple">
             <el-row :gutter="10">
               <el-col :span="4" v-for="item in dataList.data" :key="item.id">
-                <div class="  rounded  border border-current text-sm relative h-80 shadow-slate-600   " @click="showDetail(item)">
-              <span class="delete float-right font-bold cursor-pointer mr-1" @click="handleDelItem(item.id)">x</span>
+                <div
+                  class="rounded border border-current text-sm relative h-80 shadow-slate-600"
+                  @click="showDetail(item)"
+                >
+                  <span class="delete float-right font-bold cursor-pointer mr-1" @click="handleDelItem(item.id)"
+                    >x</span
+                  >
 
-              <div class="title font-bold clear-right ml-1">{{ item.title }}</div>
+                  <div class="title font-bold clear-right ml-1">{{ item.title }}</div>
 
-              <el-image class="w-28 h-28 object-scale-down" :src="item.image" ></el-image>
-              <div class="absolute overflow-hidden text-ellipsis mx-1 mt-1">{{ item.content }}</div>
-            </div>
+                  <el-image class="w-28 h-28 object-scale-down" :src="item.image"></el-image>
+                  <div class="absolute overflow-hidden text-ellipsis mx-1 mt-1">{{ item.content }}</div>
+                </div>
               </el-col>
             </el-row>
           </div></el-col
         >
       </el-row>
-      <el-pagination :page-size="5" :pager-count="5" layout="prev, pager, next" :total="Math.ceil(dataList.data.length/5) ">
-      </el-pagination>
+      <!-- <el-pagination
+        class="paginate mx-auto"
+        @current-change="handleCurrentchange"
+        background
+        layout="prev, pager, next"
+        :total="Math.ceil(dataList.total)"
+      >
+      </el-pagination> -->
     </div>
   </NavigationVue>
 </template>
@@ -35,23 +46,32 @@ export default {
   name: 'listNewCategory',
   components: { NavigationVue, LoadingVue },
   created() {
-    this.loading=true;
-    newsService.getListNewsCategory(this.$route.params.id).then(res => {
-      this.dataList = res;
-      this.loading=false
-      console.log(this.dataList.data.length);
-    })
-    .catch(()=>{
-      this.loading=false
-    })
+    this.loading = true;
+    newsService
+      .getListNewsCategory(this.$route.params.id)
+      .then(res => {
+        this.dataList = res;
+        this.loading = false;
+        console.log(this.dataList.data.length);
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
   data() {
     return {
-      loading:false,
+      loading: false,
       dataList: [],
     };
   },
   methods: {
+    handleCurrentchange(val) {
+      newsService.nextpageLstNews(val).then(response => {
+        this.data = response;
+
+        // console.log('nextpage:', this.data)
+      });
+    },
     handleDelItem(item) {
       this.$confirm('Are you sure ?', 'Warning', {
         confirmButtonText: 'OK',
@@ -66,7 +86,7 @@ export default {
               message: res,
             });
             newsService.getList().then(res => {
-              this.newsData = res;
+              this.newsData = res?.data;
             });
           });
         })
@@ -111,9 +131,5 @@ export default {
   }
 }
 
-.img {
-  width: 100%;
-  height: auto;
-}
 // }
 </style>

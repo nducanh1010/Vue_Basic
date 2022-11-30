@@ -1,5 +1,7 @@
 <template>
-
+  <!-- 
+    Add news
+  -->
   <el-button @click="this.dialogFormVisible = true" type="primary" round class="btn-add">+Add</el-button>
   <el-dialog title="News information" v-model="dialogFormVisible">
     <el-form v-model="form">
@@ -17,7 +19,7 @@
       </el-form-item>
       <!-- <el-form-item :label="form.imageName" :label-width="formLabelWidth"> -->
       <input type="file" v-on:change="handleFileChange" />
-     
+
       <!-- </el-form-item> -->
       <!-- <el-button size="small" type="primary" class="upload" @click="handleClick">Click to upload</el-button> -->
     </el-form>
@@ -29,12 +31,10 @@
   </el-dialog>
 </template>
 <style lang="scss" scoped>
-
 .btn-add {
   // display: flex !important;
   margin: 10px auto;
-  display:block;
-  
+  display: block;
 }
 .dialog-footer {
   display: flex;
@@ -49,11 +49,11 @@ import newsService from '@/services/news.services';
 import categoryService from '@/services/category.services';
 
 export default {
-  emits:['refreshList'],
+  emits: ['refreshList'],
   name: 'newsForm',
   data() {
     return {
-      openNewsUpdate:false,
+      openNewsUpdate: false,
       formLabelWidth: '120px',
       dialogFormVisible: false,
       form: {
@@ -89,8 +89,8 @@ export default {
           type: 'success',
           message: res,
         });
-        newsService.getList().then(res=>this.$emit('refreshList',res))
-        this.dialogFormVisible=false
+        newsService.getList().then(res => this.$emit('refreshList', res));
+        this.dialogFormVisible = false;
       });
     },
     handleFetchCatID() {
@@ -103,7 +103,7 @@ export default {
       this.form.image = file;
       this.dialogVisible = true;
     },
-  
+
     beforeRemove(file, fileList) {
       return this.$confirm(`Cancel the transfer of ${file.name} ?`);
     },
